@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: eb1a9d69c7beb81468cf25dee1c5c452
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - <MasterMixer>k__BackingField: {fileID: 24100000, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
