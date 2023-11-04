@@ -40,7 +40,10 @@ public class ExorcismObject : MonoBehaviour
         {
             //check if player tries to exorcise
             if (_isInPlayerContact && Input.GetKey(KeyCode.E))
+            {
                 _currentTimer -= Time.deltaTime;
+                _timerImage.DOFade(1, 0.1f);
+            }
             else
                 _currentTimer = _exorcismTime;
 
@@ -49,6 +52,7 @@ public class ExorcismObject : MonoBehaviour
             {
                 _currentSpriteIndex = 0;
                 SetTimerSprite(_currentSpriteIndex);
+                _timerImage.DOFade(0, 0.1f);
             }
             else
             {
