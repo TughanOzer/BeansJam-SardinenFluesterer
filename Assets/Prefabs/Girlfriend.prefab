@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3097243373759821963}
   - component: {fileID: 3705762549357976891}
   - component: {fileID: -5996083673493470355}
+  - component: {fileID: 2495851214764821814}
   m_Layer: 0
   m_Name: Girlfriend
   m_TagString: Untagged
@@ -42,7 +43,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6127288998327098949}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b150d1b2b112df04ba3a9c93e48c5b8e, type: 3}
   m_Name: 
@@ -143,7 +144,7 @@ Animator:
   m_GameObject: {fileID: 6127288998327098949}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9c0cc0e0ec01e8440a7d5df2894eedc0, type: 2}
+  m_Controller: {fileID: 9100000, guid: d10489035b19df04e98573f1fef1c706, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -154,3 +155,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2495851214764821814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127288998327098949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e57526ffc5afd489f49a3dd1e09e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

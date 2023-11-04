@@ -52,14 +52,15 @@ MonoBehaviour:
   sideScroller: 0
   moveDirection: {x: 0, y: 0}
   playerRigidbody: {fileID: 5673224943861256511}
-  movementSpeed: 2
+  movementSpeed: 1
   groundDetector: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   animator: {fileID: 6790968845985742512}
   audioSource: {fileID: 3407286343768933727}
-  sounds: []
+  sounds:
+  - {fileID: 0}
 --- !u!50 &5673224943861256511
 Rigidbody2D:
   serializedVersion: 4
@@ -280,7 +281,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2102403451, guid: b204234a26bf91446b20807826540798, type: 3}
+  m_Sprite: {fileID: 864404911, guid: b204234a26bf91446b20807826540798, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

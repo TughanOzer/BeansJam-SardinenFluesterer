@@ -16,16 +16,7 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Insert a float value."),
      SerializeField] float movementSpeed;
     float horizontalMovement;
-    bool showingRightSide = true;
     float verticalMovement;
-
-    [Header("Ground Detection")]
-    [Tooltip("Tip: Add an empty child object to the player and move it downwards with the moving tool, then add it to this field."),
-     SerializeField] Transform groundDetector;
-    float radius = 0.2f;
-    [Tooltip("Create a new layer and assign it to the ground objects."), 
-     SerializeField] LayerMask groundLayer;
-    bool onGround;
 
     [Header("Animation + Sound")]
     [SerializeField] Animator animator;
@@ -59,6 +50,7 @@ public class PlayerController2D : MonoBehaviour
         if (horizontalMovement != 0f || verticalMovement != 0f)
         {
             animator.SetBool("moving", true);
+            PlaySoundEffect(0);
         }
         else
             animator.SetBool("moving", false);
@@ -69,31 +61,11 @@ public class PlayerController2D : MonoBehaviour
         if(!sideScroller)
             animator.SetFloat("Move y", verticalMovement);
 
-        //if(onGround) PlaySoundEffect(...);
-        //else PlaySoundEffect(...);
-
-        if (showingRightSide && horizontalMovement <0f || !showingRightSide && horizontalMovement >0f)
-            Flip();
     }
-
-    void Flip() {
-        showingRightSide = !showingRightSide;
-        gameObject.GetComponent<SpriteRenderer>().flipX = !showingRightSide;
-
-        //Vector2 localScale = transform.localScale;
-        //localScale.x *= -1f;
-        //transform.localScale = localScale;
-    }
-
 
     void PlaySoundEffect(int x) {
         audioSource.clip = sounds[x];
         audioSource.Play();
     }
 
-    //void OnCollisionEnter(Collision c)
-    //{
-    //    if (c.gameObject.CompareTag("Ground"))
-    //        onGround = true;
-    //}
 }
