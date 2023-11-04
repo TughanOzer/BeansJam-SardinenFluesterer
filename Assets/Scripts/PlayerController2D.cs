@@ -8,7 +8,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("Game Mode")]
     [Tooltip("Check if you want to have jumping enabled, but vertical movement disabled."),
      SerializeField] bool sideScroller;
-    Vector2 moveDirection;
+    public Vector2 moveDirection;
 
     [Header("Moving")]
     [Tooltip("Tip: Create and add a Physics Material to the Player's RB to prevent getting stuck."),
@@ -18,15 +18,6 @@ public class PlayerController2D : MonoBehaviour
     float horizontalMovement;
     bool showingRightSide;
     float verticalMovement;
-
-    [Header("Jumping")]
-    [Tooltip("Insert a float value."),
-     SerializeField] float jumpForce;
-    [Tooltip("Insert a float value."),
-     SerializeField] float gravityModifier;
-    int jumpCount;
-    [Tooltip("Insert an integer value."),
-     SerializeField] int maxJumpCount;
 
     [Header("Ground Detection")]
     [Tooltip("Tip: Add an empty child object to the player and move it downwards with the moving tool, then add it to this field."),
@@ -42,66 +33,40 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Elements can be called by sounds[int x]."),
      SerializeField] List<AudioClip> sounds = new List<AudioClip>();
 
-
-    void Start() 
-    {
-        Physics.gravity *= gravityModifier;
-        jumpCount = maxJumpCount;
-
-        // preventing the player from spinning
-        playerRigidbody.freezeRotation = true;
-    }
-
     void Update()
     {
         ProcessInputs();
     }
     private void FixedUpdate()
     {
-        if (sideScroller) {
-            playerRigidbody.velocity = new Vector2(horizontalMovement * movementSpeed, playerRigidbody.velocity.y);
-            onGround = Physics2D.OverlapCircle(groundDetector.position, radius, groundLayer);
-            if (onGround)
-            {
-                jumpCount = maxJumpCount;
-                animator.SetBool("IsJumping", false);
-            }
-        }
-        else
-        {
-            playerRigidbody.velocity = new Vector2(moveDirection.x * movementSpeed, moveDirection.y * movementSpeed);
-        }
+        playerRigidbody.velocity = new Vector2(moveDirection.x * movementSpeed, moveDirection.y * movementSpeed);
     }
 
 
     void ProcessInputs()
     {
         // Axes are defined in Unity > Edit > Project Settings > Input Manager > Axes
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        horizontalMovement = Input.GetAxis("Horizontal");
+        verticalMovement = Input.GetAxis("Vertical");
+        Move();
 
-        if (!sideScroller)
-        {
-            verticalMovement = Input.GetAxisRaw("Vertical");
-            moveDirection = new Vector2(horizontalMovement, verticalMovement);
-
-        }
-        else {
-            if (horizontalMovement != 0f)
-                MoveHorizontal();
-
-            // Keycodes: https://docs.unity3d.com/ScriptReference/KeyCode.html
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (jumpCount > 0)
-                    Jump();
-            }
-        }
+        if (Input.GetKey(KeyCode.E)){ }
     }
 
-    void MoveHorizontal() {
+    void Move() {
 
-        // requires a float parameter called Speed to trigger the transition inside the animator (controller)
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+        moveDirection = new Vector2(horizontalMovement, verticalMovement);
+        if (horizontalMovement != 0f || verticalMovement != 0f)
+        {
+            animator.SetBool("moving", true);
+        }
+        else
+            animator.SetBool("moving", false);
+
+        // requiring float parameters to trigger the transition inside the animator (controller)
+        animator.SetFloat("Move x", horizontalMovement);
+        if(!sideScroller)
+            animator.SetFloat("Move y", verticalMovement);
 
         //if(onGround) PlaySoundEffect(...);
         //else PlaySoundEffect(...);
@@ -117,18 +82,6 @@ public class PlayerController2D : MonoBehaviour
         transform.localScale = localScale;
     }
     
-
-    void Jump()
-    {
-        if (jumpCount > 0)
-        {
-            animator.SetBool("IsJumping", true);
-            //PlaySoundEffect(...);
-
-            playerRigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            jumpCount--;
-        }
-    }
 
     void PlaySoundEffect(int x) {
         audioSource.clip = sounds[x];
