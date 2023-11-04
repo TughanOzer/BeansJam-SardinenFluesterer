@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8127672092202121968}
   - component: {fileID: 8573914634787859011}
   - component: {fileID: 7224295506932457620}
+  - component: {fileID: -8330008466621634499}
   m_Layer: 6
   m_Name: GhostPrefab
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   _ectoplasmChance: 1
   _floatEase: 10
   _ectoplasmPrefab: {fileID: 2046949743919438208, guid: 86b4693d0f8ff1344bc149d3b43a9e2b, type: 3}
+  animator: {fileID: 0}
 --- !u!70 &2246749405416433198
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,3 +191,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-8330008466621634499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115234703984747786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87598e4cf16c4fd4e936753515429beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}

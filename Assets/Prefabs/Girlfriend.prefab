@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4622878792310537268}
-  - component: {fileID: 6619496796430342139}
   - component: {fileID: 3097243373759821963}
   - component: {fileID: 3705762549357976891}
   - component: {fileID: -5996083673493470355}
-  - component: {fileID: 2495851214764821814}
+  - component: {fileID: 7580397068427204348}
   m_Layer: 0
   m_Name: Girlfriend
   m_TagString: Untagged
@@ -36,25 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6619496796430342139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6127288998327098949}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b150d1b2b112df04ba3a9c93e48c5b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  gridSize:
-    x: 0
-    y: 0
-  grid: {fileID: 0}
-  nextTarget: {fileID: 0}
-  unalkablePathNodes: []
 --- !u!50 &3097243373759821963
 Rigidbody2D:
   serializedVersion: 4
@@ -155,7 +135,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2495851214764821814
+--- !u!114 &7580397068427204348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,6 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6127288998327098949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e57526ffc5afd489f49a3dd1e09e9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 87598e4cf16c4fd4e936753515429beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
