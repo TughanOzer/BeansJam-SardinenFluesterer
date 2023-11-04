@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Opens a screen to display the credits.
-/// Attach to a CreditsCanvas and add a return button (to main menu) as child.
+/// Attach to a ControlsCanvas and add a return button (to main menu) as child.
 /// </summary>
-public class CreditsMenu : MonoBehaviour
+public class ControlsMenu : MonoBehaviour
 {
     #region Fields and Properties
 
-    private Canvas _creditsCanvas;
+    private Canvas _controlsCanvas;
     private Button _backButton;
 
     #endregion
@@ -18,16 +18,16 @@ public class CreditsMenu : MonoBehaviour
 
     private void Awake()
     {
-        _creditsCanvas = GetComponent<Canvas>();
-        _creditsCanvas.enabled = false;
+        _controlsCanvas = GetComponent<Canvas>();
+        _controlsCanvas.enabled = false;
     }
 
     private void OnEnable()
     {
-        MainMenu.OnCreditsMenuOpened += OnCreditsOpened;
+        MainMenu.OnControlsMenuOpened += OnControlsOpened;
         MainMenu.OnSettingsMenuOpened += OnOtherMenuOpened;
         MainMenu.OnMainMenuOpened += OnOtherMenuOpened;
-        MainMenu.OnControlsMenuOpened += OnOtherMenuOpened;
+        MainMenu.OnCreditsMenuOpened += OnOtherMenuOpened;
     }
 
     private void Start()
@@ -38,20 +38,20 @@ public class CreditsMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        MainMenu.OnCreditsMenuOpened -= OnCreditsOpened;
+        MainMenu.OnControlsMenuOpened -= OnControlsOpened;
         MainMenu.OnSettingsMenuOpened -= OnOtherMenuOpened;
         MainMenu.OnMainMenuOpened -= OnOtherMenuOpened;
-        MainMenu.OnControlsMenuOpened -= OnOtherMenuOpened;
+        MainMenu.OnCreditsMenuOpened -= OnOtherMenuOpened;
     }
 
-    private void OnCreditsOpened()
+    private void OnControlsOpened()
     {
-        _creditsCanvas.enabled = true;
+        _controlsCanvas.enabled = true;
     }
 
     private void OnOtherMenuOpened()
     {
-        _creditsCanvas.enabled = false;
+        _controlsCanvas.enabled = false;
     }
 
     private void OpenMainMenu()

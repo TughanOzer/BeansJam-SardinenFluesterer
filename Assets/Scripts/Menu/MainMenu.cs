@@ -18,10 +18,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _startButton;
     [SerializeField] private GameObject _settingsButton;
     [SerializeField] private GameObject _creditsButton;
+    [SerializeField] private GameObject _controlsButton;
 
     public static event Action OnMainMenuOpened;
     public static event Action OnSettingsMenuOpened;
     public static event Action OnCreditsMenuOpened;
+    public static event Action OnControlsMenuOpened;
 
     #endregion
 
@@ -37,6 +39,7 @@ public class MainMenu : MonoBehaviour
         OnMainMenuOpened += OnThisMenuOpened;
         OnSettingsMenuOpened += OnOtherMenuOpened;
         OnCreditsMenuOpened += OnOtherMenuOpened;
+        OnControlsMenuOpened += OnOtherMenuOpened;
     }
 
     private void OnDisable()
@@ -44,6 +47,7 @@ public class MainMenu : MonoBehaviour
         OnMainMenuOpened -= OnThisMenuOpened;
         OnSettingsMenuOpened -= OnOtherMenuOpened;
         OnCreditsMenuOpened -= OnOtherMenuOpened;
+        OnControlsMenuOpened -= OnOtherMenuOpened;
     }
 
     private void Start()
@@ -51,6 +55,7 @@ public class MainMenu : MonoBehaviour
         _startButton.GetComponent<Button>().onClick.AddListener(NewGame);
         _settingsButton.GetComponent<Button>().onClick.AddListener(OpenSettings);
         _creditsButton.GetComponent<Button>().onClick.AddListener(OpenCredits);
+        _controlsButton.GetComponent<Button>().onClick.AddListener(OpenControls);
 
         //AudioManager.Instance.PlayMenuMusic();
     }
@@ -68,6 +73,11 @@ public class MainMenu : MonoBehaviour
     public static void RaiseCreditsOpened()
     {
         OnCreditsMenuOpened?.Invoke();
+    }
+
+    public static void RaiseControlsOpened()
+    {
+        OnControlsMenuOpened?.Invoke();
     }
 
     private void OnThisMenuOpened()
@@ -92,6 +102,12 @@ public class MainMenu : MonoBehaviour
         RaiseCreditsOpened();
     }
 
+    public void OpenControls()
+    {
+        PlayButtonClick();
+        RaiseControlsOpened();
+    }
+
     public void NewGame()
     {
         PlayButtonClick();
@@ -106,7 +122,7 @@ public class MainMenu : MonoBehaviour
 
     private void PlayButtonClick()
     {
-        //AudioManager.Instance.PlaySoundEffectOnce(SFX._0001_ButtonClick);
+        AudioManager.Instance.PlayButtonClick();
     }
 
     #endregion

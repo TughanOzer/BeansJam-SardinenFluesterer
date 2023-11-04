@@ -19,7 +19,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public float MusicVolume { get; private set; } = 1;
     [field: SerializeField] public float SoundVolume { get; private set; } = 1;
     
-    private AudioSource _sfxVolumePreviewSound;
+    [SerializeField] private AudioSource _sfxVolumePreviewSound;
+    [SerializeField] private AudioSource _buttonClick;
 
     #endregion
 
@@ -37,12 +38,10 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        _sfxVolumePreviewSound = GetComponent<AudioSource>();
-
         //Sets start volumes if the should be adjusted immediately
-        SetMasterVolume(MasterVolume);
-        SetMusicVolume(MusicVolume);
-        SetSoundVolume(SoundVolume, false);
+        Instance.SetMasterVolume(MasterVolume);
+        Instance.SetMusicVolume(MusicVolume);
+        Instance.SetSoundVolume(SoundVolume, false);
     }
 
     public void FadeInGameTrack(AudioSource audioSource)
@@ -79,25 +78,30 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
+    public void PlayButtonClick()
+    {
+        Instance.PlayOneShot(_buttonClick);
+    }
+
     public void SetMasterVolume(float volume)
     {
         var newVolume = GetLogCorrectedVolume(volume);
         MasterMixer.SetFloat("Master", newVolume);
-        MasterVolume = newVolume;
+        MasterVolume = volume;
     }
 
     public void SetMusicVolume(float volume)
     {
         var newVolume = GetLogCorrectedVolume(volume);
         MasterMixer.SetFloat("Music", newVolume);
-        MusicVolume = newVolume;
+        MusicVolume = volume;
     }
 
     public void SetSoundVolume(float volume, bool changedBySlider = true)
     {
         var newVolume = GetLogCorrectedVolume(volume);
-        MasterMixer.SetFloat("Sound", newVolume);
-        SoundVolume = newVolume;
+        MasterMixer.SetFloat("SFX", newVolume);
+        SoundVolume = volume;
 
         //Play an exemplary SFX to give the play an auditory volume feedback
         if (changedBySlider)
@@ -106,7 +110,7 @@ public class AudioManager : MonoBehaviour
 
     private float GetLogCorrectedVolume(float volume)
     {
-        return volume > 0 ? Mathf.Log(volume) * 20f : -80f;
+        return (volume > 0 ? Mathf.Log(volume) * 20f : -80f);
     }
 
     #endregion

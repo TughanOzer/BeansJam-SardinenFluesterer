@@ -31,6 +31,7 @@ public class SettingMenu : MonoBehaviour
         MainMenu.OnSettingsMenuOpened += OnSettingsOpened;
         MainMenu.OnMainMenuOpened += OnOtherMenuOpened;
         MainMenu.OnCreditsMenuOpened += OnOtherMenuOpened;
+        MainMenu.OnControlsMenuOpened += OnOtherMenuOpened;
     }
 
     private void Start()
@@ -38,6 +39,7 @@ public class SettingMenu : MonoBehaviour
         _backButton = GetComponentInChildren<Button>();
 
         _backButton.onClick.AddListener(OpenMainMenu);
+        _backButton.onClick.AddListener(AudioManager.Instance.PlayButtonClick);
         
         _masterVolume.onValueChanged.AddListener(SetMasterVolume);
         _musicVolume.onValueChanged.AddListener(SetMusicVolume);
@@ -49,6 +51,7 @@ public class SettingMenu : MonoBehaviour
         MainMenu.OnSettingsMenuOpened -= OnSettingsOpened;
         MainMenu.OnMainMenuOpened -= OnOtherMenuOpened;
         MainMenu.OnCreditsMenuOpened -= OnOtherMenuOpened;
+        MainMenu.OnControlsMenuOpened -= OnOtherMenuOpened;
     }
 
     private void OnSettingsOpened()
