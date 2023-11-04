@@ -16,7 +16,10 @@ public class Ghost : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _floatTime = 1f;
     [SerializeField] private float _floatAmplitude = 1f;
+    [SerializeField] private float _ectoplasmChance = 0.5f;
     [SerializeField] private Ease _floatEase = Ease.Linear;
+
+    [SerializeField] private GameObject _ectoplasmPrefab;
 
 
     private int _objectIndex;
@@ -26,7 +29,23 @@ public class Ghost : MonoBehaviour
     private Transform _visuals;
 
     const string INTERACTABLE_OBJECT_TAG = "InteractableObject";
+    const string PATHLOGIC_TILE_TAG = "PathLogicTile";
     
+    /*
+     * Interactable Objects:
+     * Doors - for setting a trap
+     * Flower pots
+     * Bath Tub
+     * Windows
+     * Fireplaces
+     * Teddy
+     * Armor
+     * Furniture
+     * 
+     * Object independent Actions:
+     * Ectoplasma on tile -> chance when crossing a valid tile? Tile layer with trigger Collider
+     */
+
     #endregion
 
     #region Methods
@@ -85,6 +104,15 @@ public class Ghost : MonoBehaviour
         }        
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag(PATHLOGIC_TILE_TAG) && CheckForEctoplasmDrop())
+        {
+            var tilePosition = other.transform.position;
+            Instantiate(_ectoplasmPrefab, tilePosition, Quaternion.identity);
+        }
+    }
+
 
 
     private void SetInteractionTarget()
@@ -103,7 +131,11 @@ public class Ghost : MonoBehaviour
         }
     }
 
-
+    private bool CheckForEctoplasmDrop()
+    {
+        float randomNumber = UnityEngine.Random.Range(0, 1f);
+        return randomNumber < _ectoplasmChance;
+    }
 
     #endregion
 }
