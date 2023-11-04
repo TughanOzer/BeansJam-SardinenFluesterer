@@ -9,7 +9,7 @@ public class ObjectsFoundVisuals : MonoBehaviour
 {
     #region Fields and Properties
 
-    private List<Image> _ghosts = new();
+    public List<Image> GhostImages { get; private set; } = new();
 
     #endregion
 
@@ -17,7 +17,7 @@ public class ObjectsFoundVisuals : MonoBehaviour
 
     private void Awake()
     {
-        _ghosts = GetComponentsInChildren<Image>().ToList();
+        GhostImages = GetComponentsInChildren<Image>().ToList();
     }
 
     private void OnEnable()
@@ -32,10 +32,10 @@ public class ObjectsFoundVisuals : MonoBehaviour
 
     private void FadeImage(int _)
     {
-        if (_ghosts.Count > 0)
+        if (GhostImages.Count > 0)
         {
-            var image = _ghosts[_ghosts.Count - 1];
-            _ghosts.Remove(image);
+            var image = GhostImages[GhostImages.Count - 1];
+            GhostImages.Remove(image);
             image.DOFade(0.15f, 2).SetEase(Ease.InBounce);
             image.rectTransform.DOShakeRotation(2, 30, 2, 45, true, ShakeRandomnessMode.Harmonic);
         }
