@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GhostObjects : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class GhostObjects : MonoBehaviour
         public static int taskAngstValue10 = 10, taskAngstValue25 = 25, taskAngstValue35 = 50;
         public static float taskTime1 = 3f, taskTime2 = 5f, taskTime3 = 8f;
     }
-    int fearValue = 0;
+    int fearValue;
     int thisObjectAngstValue;
     float thisObjectTimeValue;
 
@@ -101,20 +102,22 @@ public class GhostObjects : MonoBehaviour
 
     void TaskCompleted() {
         Debug.Log("TaskDone");
-        ChangeFearLevel(thisObjectAngstValue);
+        ChangeFearLevel(-thisObjectAngstValue);
         //item fade in, bisher destroy
         Destroy(this.gameObject);
     }
     public void ChangeFearLevel(int fearChangeValue) {
+        fearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
         fearValue += fearChangeValue;
         fearDisplay.text = "Fear: " + fearValue;
+        fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = fearValue;
     }
     public void PlayerInteraction() {
         
     }
 
-    public void GhostInteraction(int fearValue) {
-        ChangeFearLevel(fearValue);
+    public void GhostInteraction() {
+        ChangeFearLevel(thisObjectAngstValue);
 
         // item fade out
 
