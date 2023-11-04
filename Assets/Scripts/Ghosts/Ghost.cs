@@ -27,7 +27,6 @@ public class Ghost : MonoBehaviour
     private GameObject _nextInteractionObject;
     private bool _isAtTargetObject;
     private Transform _visuals;
-    private SpriteRenderer _visualRenderer;
 
     const string INTERACTABLE_OBJECT_TAG = "InteractableObject";
     const string PATHLOGIC_TILE_TAG = "PathLogicTile";
@@ -64,7 +63,6 @@ public class Ghost : MonoBehaviour
     private void Awake()
     {
         _visuals = transform.GetChild(0);
-        _visualRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -98,12 +96,6 @@ public class Ghost : MonoBehaviour
         {
             _isAtTargetObject = false;
             var direction = nextInteractionPosition - transform.position;
-
-            if (direction.x > 0)
-                _visualRenderer.flipX = false;
-            else
-                _visualRenderer.flipX = true;
-
             transform.Translate(direction.normalized * _speed);
         }
         else
@@ -120,6 +112,8 @@ public class Ghost : MonoBehaviour
             Instantiate(_ectoplasmPrefab, tilePosition, Quaternion.identity);
         }
     }
+
+
 
     private void SetInteractionTarget()
     {
@@ -141,11 +135,6 @@ public class Ghost : MonoBehaviour
     {
         float randomNumber = UnityEngine.Random.Range(0, 1f);
         return randomNumber < _ectoplasmChance;
-    }
-
-    public static void RaiseExorcism(int objectIndex)
-    {
-        OnExorcism?.Invoke(objectIndex);
     }
 
     #endregion
