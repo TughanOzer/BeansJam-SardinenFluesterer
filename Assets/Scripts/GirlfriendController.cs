@@ -50,6 +50,7 @@ public class GirlfriendController : MonoBehaviour
     public void NextTask() {
         currentPosition = new int2((int)transform.position.x, (int)transform.position.y);
         int2 targetPosition = new((int)nextTarget.position.x, (int)nextTarget.position.y);
+        Debug.Log($"currentPosition: {currentPosition}, targetPosition: {targetPosition}");
         FindPath(currentPosition,targetPosition);
     }
     public void FindPath(int2 startPosition, int2 endPosition)
@@ -167,8 +168,8 @@ public class GirlfriendController : MonoBehaviour
             }
         }
         PathNode endNode = pathNodeArray[endNodeIndex];
-        if (endNode.cameFromNodeIndex == -1) { 
-            //didn't find a path
+        if (endNode.cameFromNodeIndex == -1) {
+            Debug.Log("Didn't find a path");//didn't find a path
         }
         else
         {
