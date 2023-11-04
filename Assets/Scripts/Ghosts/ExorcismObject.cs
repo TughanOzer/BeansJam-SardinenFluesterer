@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -21,6 +22,7 @@ public class ExorcismObject : MonoBehaviour
     private bool _isInPlayerContact;
     const string PLAYER_TAG = "Player";
 
+    private bool _isExcorcised;
 
     #endregion
 
@@ -34,24 +36,33 @@ public class ExorcismObject : MonoBehaviour
 
     private void Update()
     {
-        if (_isInPlayerContact && Input.GetKey(KeyCode.E))
+        if (!_isExcorcised)
         {
-            _currentTimer -= Time.deltaTime;
-        }
+            //check if player tries to exorcise
+            if (_isInPlayerContact && Input.GetKey(KeyCode.E))
+                _currentTimer -= Time.deltaTime;
+            else
+                _currentTimer = _exorcismTime;
 
-        if (_currentTimer == _exorcismTime)
-        {
-            _currentSpriteIndex = 0;
-            SetTimerSprite(_currentSpriteIndex);          
-        }
-        else
-        {
-            var currentIncrement = _timerIncrement * (_currentSpriteIndex + 1);
-            if (_currentTimer < (_exorcismTime - currentIncrement))
+            //handle timers for visuals
+            if (_currentTimer == _exorcismTime)
             {
-                _currentSpriteIndex++;
+                _currentSpriteIndex = 0;
                 SetTimerSprite(_currentSpriteIndex);
             }
+            else
+            {
+                var currentIncrement = _timerIncrement * (_currentSpriteIndex + 1);
+                if (_currentTimer < (_exorcismTime - currentIncrement))
+                {
+                    _currentSpriteIndex++;
+                    SetTimerSprite(_currentSpriteIndex);
+                }
+            }
+
+            //finished exorcising
+            if (_currentTimer <= 0)
+                ObjectExorcised();
         }
     }
 
@@ -77,6 +88,16 @@ public class ExorcismObject : MonoBehaviour
     private void ObjectExorcised()
     {
         Ghost.RaiseExorcism(_exorcismIndex);
+        _isExcorcised = true;
+        var renderer = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        _timerImage.transform.DOShakeRotation(1f, 20);
+        _timerImage.DOFade(0, 1f);
+        renderer.DOFade(0, 1f).OnComplete(DestroyThisObject);
+    }
+
+    private void DestroyThisObject()
+    {
+        Destroy(gameObject);
     }
 
     #endregion
