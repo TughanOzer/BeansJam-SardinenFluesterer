@@ -6,6 +6,7 @@ using Unity.Collections;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GirlfriendController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GirlfriendController : MonoBehaviour
 
 
     public int2 gridSize;
-    [SerializeField] Grid grid;
+    [SerializeField] Tilemap grid;
     int2 currentPosition;
     public Transform nextTarget;
     [SerializeField]  List<int2> unalkablePathNodes = new List<int2>();
@@ -42,12 +43,14 @@ public class GirlfriendController : MonoBehaviour
 
     private void Start()
     {
+        gridSize = new int2(grid.size.x,grid.size.y);
         NextTask();
     }
    
     public void NextTask() {
         currentPosition = new int2((int)transform.position.x, (int)transform.position.y);
         int2 targetPosition = new((int)nextTarget.position.x, (int)nextTarget.position.y);
+        Debug.Log($"currentPosition: {currentPosition}, targetPosition: {targetPosition}");
         FindPath(currentPosition,targetPosition);
     }
     public void FindPath(int2 startPosition, int2 endPosition)
@@ -165,8 +168,8 @@ public class GirlfriendController : MonoBehaviour
             }
         }
         PathNode endNode = pathNodeArray[endNodeIndex];
-        if (endNode.cameFromNodeIndex == -1) { 
-            //didn't find a path
+        if (endNode.cameFromNodeIndex == -1) {
+            Debug.Log("Didn't find a path");//didn't find a path
         }
         else
         {
