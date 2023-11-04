@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
 
     #region Methods
      
-
     private void Awake()
     {
         if (Instance == null)
