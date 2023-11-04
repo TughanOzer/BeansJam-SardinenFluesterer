@@ -6,6 +6,7 @@ using Unity.Collections;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GirlfriendController : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GirlfriendController : MonoBehaviour
 
 
     public int2 gridSize;
-    [SerializeField] Grid grid;
+    [SerializeField] Tilemap grid;
     int2 currentPosition;
     public Transform nextTarget;
     [SerializeField]  List<int2> unalkablePathNodes = new List<int2>();
@@ -42,6 +43,7 @@ public class GirlfriendController : MonoBehaviour
 
     private void Start()
     {
+        gridSize = new int2(grid.size.x,grid.size.y);
         NextTask();
     }
    
