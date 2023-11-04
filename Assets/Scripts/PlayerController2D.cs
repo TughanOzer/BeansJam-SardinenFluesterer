@@ -16,7 +16,7 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Insert a float value."),
      SerializeField] float movementSpeed;
     float horizontalMovement;
-    bool showingRightSide;
+    bool showingRightSide = true;
     float verticalMovement;
 
     [Header("Ground Detection")]
@@ -65,6 +65,7 @@ public class PlayerController2D : MonoBehaviour
 
         // requiring float parameters to trigger the transition inside the animator (controller)
         animator.SetFloat("Move x", horizontalMovement);
+
         if(!sideScroller)
             animator.SetFloat("Move y", verticalMovement);
 
@@ -77,11 +78,13 @@ public class PlayerController2D : MonoBehaviour
 
     void Flip() {
         showingRightSide = !showingRightSide;
-        Vector2 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
+        gameObject.GetComponent<SpriteRenderer>().flipX = !showingRightSide;
+
+        //Vector2 localScale = transform.localScale;
+        //localScale.x *= -1f;
+        //transform.localScale = localScale;
     }
-    
+
 
     void PlaySoundEffect(int x) {
         audioSource.clip = sounds[x];
