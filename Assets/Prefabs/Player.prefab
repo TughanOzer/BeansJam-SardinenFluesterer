@@ -53,10 +53,6 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   playerRigidbody: {fileID: 5673224943861256511}
   movementSpeed: 1
-  groundDetector: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   animator: {fileID: 6790968845985742512}
   audioSource: {fileID: 3407286343768933727}
   sounds:
@@ -278,8 +274,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1926311615
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 864404911, guid: b204234a26bf91446b20807826540798, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
