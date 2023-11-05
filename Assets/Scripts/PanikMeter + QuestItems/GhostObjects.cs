@@ -63,8 +63,6 @@ public class GhostObjects : MonoBehaviour
 
     bool girlfriendInRange = false;
     private void OnTriggerEnter2D(Collider2D collision) {
-
-        Debug.Log("TriggerEnter");
         if (collision.GetComponent<PlayerController2D>() && objectIsHaunted) {
             canvas.SetActive(true);
             StartCoroutine(Timer(thisObjectTimeValue));
@@ -122,7 +120,7 @@ public class GhostObjects : MonoBehaviour
     public void GhostInteraction() {
         objectIsHaunted = true;
         StartCoroutine(FadeObjectOut(true));
-        //StartCoroutine(WaitingForGirlfriend());
+        StartCoroutine(WaitingForGirlfriend());
     }
 
     IEnumerator WaitingForGirlfriend() {
@@ -134,8 +132,9 @@ public class GhostObjects : MonoBehaviour
                     objectIsHaunted = false;
                     girlfriendInRange = false;
                     yield return null;
-                }
-                else yield return null;
+                } 
+                else
+                yield return null;
             }
         }
     }
@@ -143,30 +142,22 @@ public class GhostObjects : MonoBehaviour
     [SerializeField] float fadeOutTime = 2f;
     [SerializeField] float fadeOutMin = 0.25f;
     IEnumerator FadeObjectOut(bool fadeOut) {
-        Debug.Log("Fadeout1");
         SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
         Color color = sprite.color;
 
-        //FadeIN
         if (!fadeOut) {
-            Debug.Log("fadeInMin0: " + color.a);
             while (color.a < 1f) {
                 color.a += Time.deltaTime / fadeOutTime;
                 sprite.color = color;
             }
         }
-
-        //FadeOUT
         else {
-            Debug.Log("FadeOUT2");
             while (color.a >= fadeOutMin) {
-                Debug.Log("FadeIn: " + color.a);
                 color.a -= Time.deltaTime / fadeOutTime;
                 this.gameObject.GetComponent<SpriteRenderer>().color = color;
             }
         }
         yield return null;
     }
-
 
 }
