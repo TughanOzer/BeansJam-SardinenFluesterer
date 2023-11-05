@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LoadHelper
 {
-    public static SceneName SceneToBeLoaded { get; private set; } = SceneName.LevelOne;
+    public static SceneName SceneToBeLoaded { get; private set; } = SceneName.Level_Final;
     public static float LoadDuration { get; private set; } = 1f;
 
     public static void LoadSceneWithLoadingScreen(SceneName sceneName)
@@ -19,7 +19,6 @@ public class LoadHelper
 public enum SceneName
 {
     MainMenu,
-    LevelOne,
+    Level_Final,
     LoadingScreen,
-    GameOver,
 }

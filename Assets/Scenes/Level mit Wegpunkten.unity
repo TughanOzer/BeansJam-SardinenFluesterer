@@ -21533,6 +21533,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2672226899797405242, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672226899797405242, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672226899797405242, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6255014359143730148, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
       propertyPath: m_SortingOrder
       value: 4
