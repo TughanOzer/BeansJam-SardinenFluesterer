@@ -27,7 +27,6 @@ public class GirlfriendControllerEndo : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out GirlfriendStation station))
         {
-            Debug.Log("Collision with station!");
             _isOnStation = true;
             _currentStationTimer = station.StationStayDuration;
             _currentTargetIndex = 0;
