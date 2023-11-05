@@ -76,7 +76,6 @@ public class ExorcismObject : MonoBehaviour
             _timerImage.sprite = _timerSprites[index];
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(PLAYER_TAG))
