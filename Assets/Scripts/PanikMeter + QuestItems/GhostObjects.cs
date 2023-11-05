@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 using TMPro;
-using Unity.VisualScripting;
 
 public class GhostObjects : MonoBehaviour
 {
@@ -61,22 +60,27 @@ public class GhostObjects : MonoBehaviour
         }
     }
 
+    bool girlfriendInRange = false;
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.GetComponent<PlayerController2D>() != null) {
-            Debug.Log("TriggerEnter");
+        if (collision.GetComponent<PlayerController2D>()) {
             canvas.SetActive(true);
             StartCoroutine(Timer(thisObjectTimeValue));
         }
-        else if (collision.GetComponent<PlayerController2D>() != null) {
-
+        else if (collision.GetComponent<Ghost>()) {
+            //Evtl nicht nötig
+        }
+        else if (collision.GetComponent<GirlfriendController>()) {
+            girlfriendInRange = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.GetComponent<PlayerController2D>() != null) {
-            Debug.Log("TriggerExit");
+        if (collision.GetComponent<PlayerController2D>()) {
             canvas.SetActive(false);
             StopCoroutine(Timer(0));
+        }
+        else if (collision.GetComponent<GirlfriendController>()) {
+            girlfriendInRange = false;
         }
     }
 
@@ -92,11 +96,10 @@ public class GhostObjects : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.E) && secondsleft <= 0) TaskCompleted();
             else if (!Input.GetKey(KeyCode.E)) {
-                Debug.Log("Reset Time");
                 secondsleft = secondsleftValue;
                 timeRemaining.text = secondsleft.ToString();
             }
-            yield return new WaitForSeconds(0); //???
+            yield return null;
         }
     }
 
@@ -104,6 +107,7 @@ public class GhostObjects : MonoBehaviour
         Debug.Log("TaskDone");
         ChangeFearLevel(-thisObjectAngstValue);
         //item fade in, bisher destroy
+        objectIsHaunted = false;
         Destroy(this.gameObject);
     }
     public void ChangeFearLevel(int fearChangeValue) {
@@ -113,15 +117,47 @@ public class GhostObjects : MonoBehaviour
         fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = fearValue;
     }
 
-    public void PlayerInteraction() {
-        
-    }
-
+    bool objectIsHaunted = false;
     public void GhostInteraction() {
-        ChangeFearLevel(thisObjectAngstValue);
-
-        // item fade out
-
+        objectIsHaunted = true;
+        StartCoroutine(FadeObjectOut(false));
+        StartCoroutine(WaitingForGirlfriend());
     }
+
+    IEnumerator WaitingForGirlfriend() {
+        if (objectIsHaunted) {
+            while (objectIsHaunted) {
+                if (girlfriendInRange) {
+                    ChangeFearLevel(thisObjectAngstValue);
+                    StartCoroutine(FadeObjectOut(true));
+                    objectIsHaunted = false;
+                    girlfriendInRange = false;
+                    yield return null;
+                }
+            }
+        }
+        else yield return null;
+    }
+
+    [SerializeField] float fadeOutTime = 2f;
+    [SerializeField] float fadeOutMin = 0.25f;
+    IEnumerator FadeObjectOut(bool invert) {
+        SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        Color color = sprite.color;
+        if (!invert) {
+            while (color.a > 1f) {
+                color.a += Time.deltaTime / fadeOutTime;
+                sprite.color = color;
+            }
+        }
+        else {
+            while (color.a > fadeOutMin) {
+                color.a -= Time.deltaTime / fadeOutTime;
+                sprite.color = color;
+            }
+        }
+        yield return null;
+    }
+
 
 }

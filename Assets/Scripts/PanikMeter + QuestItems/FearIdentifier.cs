@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FearIdentifier : MonoBehaviour
 {
-
     public int globalFearValu = 0;
 
 }
