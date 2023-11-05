@@ -131,6 +131,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184101050246121476, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024986267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBox
@@ -759,17 +771,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
---- !u!114 &847528862 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8615184361241733507, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
-  m_PrefabInstance: {fileID: 895106025}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fb775c2241635448ac13908904d0cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &895106025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -778,6 +779,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184101050246121476, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024986267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBox (2)
@@ -846,6 +859,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184101050246121476, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024986267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBox (3)
@@ -1162,7 +1187,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 847528862}
+      - m_Target: {fileID: 1861295243}
         m_TargetAssemblyTypeName: GhostObjects, Assembly-CSharp
         m_MethodName: GhostInteraction
         m_Mode: 1
@@ -1483,6 +1508,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a02cdd7ed097056449770d27719ca948, type: 3}
+--- !u!1001 &1861295242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7680559559716127459, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_Name
+      value: FearSchrank
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196438205773441071, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+--- !u!114 &1861295243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8615184361241733507, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+  m_PrefabInstance: {fileID: 1861295242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fb775c2241635448ac13908904d0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2025623953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1564,6 +1657,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184101050246121476, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024986267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351093400523882216, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBox (1)
@@ -1633,3 +1738,4 @@ SceneRoots:
   - {fileID: 2036837368}
   - {fileID: 895106025}
   - {fileID: 1216684950}
+  - {fileID: 1861295242}

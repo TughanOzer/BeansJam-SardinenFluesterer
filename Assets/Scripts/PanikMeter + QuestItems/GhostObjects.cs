@@ -76,7 +76,6 @@ public class GhostObjects : MonoBehaviour
             ghost.SetWaitTime(thisObjectTimeValue);
         }
         else if (collision.GetComponent<GirlfriendControllerEndo>()) {
-            Debug.Log("Girlfriend in Range");
             girlfriendInRange = true;
         }
     }
@@ -137,53 +136,37 @@ public class GhostObjects : MonoBehaviour
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
                     ChangeFearLevel(thisObjectAngstValue);
-                    StartCoroutine(FadeObjectOut(false));
+                    //StartCoroutine(FadeObjectOut(false));
                     objectIsHaunted = false;
                     girlfriendInRange = false;
                     yield return null;
                 } 
-                else
-                    //Debug.Log("Girlfriend Not Range");
-                yield return null;
+                else yield return null;
             }
         }
     }
 
-    [SerializeField] float fadeOutTime = 2f;
-    [SerializeField] float fadeOutMin = 0.25f;
-    IEnumerator FadeObjectOut(bool fadeOut) {
-        SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
-        Color color = sprite.color;
-        float alpha = color.a;
+    //[SerializeField] float fadeOutTime = 2f;
+    //[SerializeField] float fadeOutMin = 0.25f;
+    //IEnumerator FadeObjectOut(bool fadeOut) {
+    //    SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
+    //    Color color = sprite.color;
+    //    float alpha = color.a;
 
-        if(fadeOut) {
-            for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
+    //    if(fadeOut) {
+    //        for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
 
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, fadeOutMin, t));
-                this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
-            }
-        }
-        else {
-            for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
-                this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
-            }
-        }
-
-        //if (!fadeOut) {
-        //    while (color.a < 1f) {
-        //        color.a += Time.deltaTime / fadeOutTime;
-        //        sprite.color = color;
-        //    }
-        //}
-        //else {
-        //    while (color.a >= fadeOutMin) {
-        //        color.a -= Time.deltaTime / fadeOutTime;
-        //        this.gameObject.GetComponent<SpriteRenderer>().color = color;
-        //    }
-        //}
-
-        yield return null;
-    }
+    //            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, fadeOutMin, t));
+    //            this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
+    //        }
+    //    }
+    //    else {
+    //        for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
+    //            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+    //            this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
+    //        }
+    //    }
+    //    yield return null;
+    //}
 
 }
