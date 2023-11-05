@@ -113,6 +113,7 @@ public class MainMenu : MonoBehaviour
         PlayButtonClick();
         //AudioManager.Instance.StopMenuMusic();
         //AudioManager.Instance.PlayLevelMusic();       
+        LoadHelper.LoadSceneWithLoadingScreen(SceneName.Level_Final);
     }
 
     public void QuitGame()

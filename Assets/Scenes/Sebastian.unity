@@ -2590,6 +2590,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6336230106725177087, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336230106725177087, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336230106725177087, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8246356540327246636, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
