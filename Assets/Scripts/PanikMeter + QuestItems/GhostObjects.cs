@@ -19,7 +19,8 @@ public class GhostObjects : MonoBehaviour
 
     [SerializeField] GOValues goValues;
 
-    int fearValue;
+    int localFearValue;
+    bool girlfriendInRange = false;
     bool objectIsHaunted = false;
 
     private void Start() {
@@ -28,26 +29,25 @@ public class GhostObjects : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    bool girlfriendInRange = false;
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.GetComponent<PlayerController2D>() && objectIsHaunted) {
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.GetComponent<PlayerController2D>() && objectIsHaunted) {
             canvas.SetActive(true);
             StartCoroutine(Timer(goValues.taskTime));
         }
-        else if (collision.TryGetComponent(out Ghost ghost)) {
+        else if (col.TryGetComponent(out Ghost ghost)) {
             ghost.SetWaitTime(goValues.taskTime);
         }
-        else if (collision.GetComponent<GirlfriendControllerEndo>()) {
+        else if (col.GetComponent<GirlfriendControllerEndo>()) {
             girlfriendInRange = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.GetComponent<PlayerController2D>()) {
+    private void OnTriggerExit2D(Collider2D col) {
+        if (col.GetComponent<PlayerController2D>()) {
             canvas.SetActive(false);
             StopCoroutine(Timer(0));
         }
-        else if (collision.GetComponent<GirlfriendController>()) {
+        else if (col.GetComponent<GirlfriendController>()) {
             girlfriendInRange = false;
         }
     }
@@ -79,10 +79,11 @@ public class GhostObjects : MonoBehaviour
 
     }
     public void ChangeFearLevel(int fearChangeValue) {
-        fearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
-        fearValue += fearChangeValue;
-        fearDisplay.text = "Fear: " + fearValue;
-        fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = fearValue;
+        localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
+        localFearValue += fearChangeValue;
+        // das hier raus
+        fearDisplay.text = "Fear: " + localFearValue;
+        fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
     }
 
     public void GhostInteraction() {

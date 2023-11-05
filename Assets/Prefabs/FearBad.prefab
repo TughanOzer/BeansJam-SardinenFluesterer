@@ -102,12 +102,7 @@ MonoBehaviour:
   timeRemaining: {fileID: 2274975065957748724}
   slider: {fileID: 5740620935268174993}
   canvas: {fileID: 8347713785966641878}
-  hauntedSprite: {fileID: 21300000, guid: 9655444caab15784db3ba5c1f9016e4c, type: 3}
-  standartSprite: {fileID: 0}
-  taskFearValue: 2
-  taskTimeValue: 2
-  fadeOutTime: 2
-  fadeOutMin: 0.25
+  goValues: {fileID: 11400000, guid: 2577de62030252543babcfa7f1a36e2e, type: 2}
 --- !u!58 &1060483764263604924
 CircleCollider2D:
   m_ObjectHideFlags: 0
