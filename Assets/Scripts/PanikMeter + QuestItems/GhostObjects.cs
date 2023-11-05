@@ -80,7 +80,7 @@ public class GhostObjects : MonoBehaviour
     }
 
     void TaskCompleted() {
-        ChangeFearLevel(-goValues.taskAngstValue);
+        ChangeFearLevel(goValues.taskAngstValue);
         objectIsHaunted = false;
         canvas.SetActive(false);
         spriteRenderer.sprite = standartSprite;
@@ -91,6 +91,8 @@ public class GhostObjects : MonoBehaviour
     public void ChangeFearLevel(int fearChangeValue) {
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
         localFearValue += fearChangeValue;
+
+        fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
     }
 
     public void GhostInteraction() {
@@ -105,7 +107,7 @@ public class GhostObjects : MonoBehaviour
         if (objectIsHaunted) {
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
-                    ChangeFearLevel(goValues.taskAngstValue);
+                    ChangeFearLevel(-goValues.taskAngstValue);
                     audioSource.clip = goValues.girlfriendScream;
                     audioSource.Play();
 
