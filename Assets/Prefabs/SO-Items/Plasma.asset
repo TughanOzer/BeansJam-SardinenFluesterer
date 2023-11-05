@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plasma
   m_EditorClassIdentifier: 
   taskAngstValue: 5
-  taskTime: 2
+  taskTime: 1
   hauntedSprite: {fileID: 21300000, guid: 341fdcbf75ab39643901e7c6068ba008, type: 3}
   playerCleaning: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}
   ghostUseSound: {fileID: 8300000, guid: 3ab5a4d7902a1ae4391cd3bada8f8d1d, type: 3}
