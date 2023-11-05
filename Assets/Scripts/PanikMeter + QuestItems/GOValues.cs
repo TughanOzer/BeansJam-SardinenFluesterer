@@ -10,6 +10,7 @@ public class GOValues : ScriptableObject
     public float taskTime;
 
     public Sprite hauntedSprite;
-
-
+    public AudioClip playerCleaning;
+    public AudioClip ghostUseSound;
+    public AudioClip girlfriendScream;
 }

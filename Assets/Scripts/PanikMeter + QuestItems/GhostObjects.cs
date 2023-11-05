@@ -6,6 +6,8 @@ using System;
 using UnityEngine.Events;
 using TMPro;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class GhostObjects : MonoBehaviour
 {
     public event EventHandler OnGhostInteraction;
@@ -18,6 +20,7 @@ public class GhostObjects : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     [SerializeField] GOValues goValues;
+    [SerializeField] AudioSource audioSource;
 
     int localFearValue;
     bool girlfriendInRange = false;
@@ -27,6 +30,7 @@ public class GhostObjects : MonoBehaviour
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
         standartSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
@@ -77,6 +81,8 @@ public class GhostObjects : MonoBehaviour
         canvas.SetActive(false);
         spriteRenderer.sprite = standartSprite;
 
+        audioSource.clip = goValues.playerCleaning;
+        audioSource.Play();
     }
     public void ChangeFearLevel(int fearChangeValue) {
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
@@ -89,6 +95,8 @@ public class GhostObjects : MonoBehaviour
     public void GhostInteraction() {
         objectIsHaunted = true;
         spriteRenderer.sprite = goValues.hauntedSprite;
+        audioSource.clip = goValues.ghostUseSound;
+        audioSource.Play();
         StartCoroutine(WaitingForGirlfriend());
     }
 
@@ -97,6 +105,9 @@ public class GhostObjects : MonoBehaviour
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
                     ChangeFearLevel(goValues.taskAngstValue);
+                    audioSource.clip = goValues.girlfriendScream;
+                    audioSource.Play();
+
                     objectIsHaunted = false;
                     spriteRenderer.sprite = standartSprite;
                     girlfriendInRange = false;
