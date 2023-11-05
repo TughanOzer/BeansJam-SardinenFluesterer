@@ -70,7 +70,8 @@ public class GhostObjects : MonoBehaviour
         else if (collision.TryGetComponent(out Ghost ghost)) {
             ghost.SetWaitTime(thisObjectTimeValue);
         }
-        else if (collision.GetComponent<GirlfriendController>()) {
+        else if (collision.GetComponent<GirlfriendControllerEndo>()) {
+            Debug.Log("Girlfriend in Range");
             girlfriendInRange = true;
         }
     }
@@ -127,6 +128,7 @@ public class GhostObjects : MonoBehaviour
         if (objectIsHaunted) {
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
+                    Debug.Log("Girlfriend in Range 2");
                     ChangeFearLevel(thisObjectAngstValue);
                     StartCoroutine(FadeObjectOut(false));
                     objectIsHaunted = false;
@@ -134,6 +136,7 @@ public class GhostObjects : MonoBehaviour
                     yield return null;
                 } 
                 else
+                    //Debug.Log("Girlfriend Not Range");
                 yield return null;
             }
         }
