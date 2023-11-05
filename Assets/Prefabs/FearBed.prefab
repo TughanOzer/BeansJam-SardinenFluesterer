@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 2770160475883787836}
   - component: {fileID: 1060483764263604924}
   m_Layer: 0
-  m_Name: FearBox
+  m_Name: FearBed
   m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -836,7 +836,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 07ab2c78af2fe0046b48b7f0ffc73c4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31bce250536c42f4aa91d29435d78f26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -862,6 +862,7 @@ MonoBehaviour:
   timeRemaining: {fileID: 7997001610925781920}
   slider: {fileID: 4522620147418656965}
   canvas: {fileID: 193745121820360322}
+  hauntedSprite: {fileID: 21300000, guid: 78d1691e090a1af409fa02550db7f58a, type: 3}
   taskFearValue: 2
   taskTimeValue: 2
   fadeOutTime: 2

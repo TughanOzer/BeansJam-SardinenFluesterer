@@ -14,6 +14,9 @@ public class GhostObjects : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeRemaining;
     [SerializeField] Slider slider;
     [SerializeField] GameObject canvas;
+    [SerializeField] Sprite hauntedSprite;
+    [SerializeField] Sprite standartSprite;
+    SpriteRenderer spriteRenderer;
 
     [SerializeField] enum TaskFearValues { taskValueAngst10, taskValueAngst25, taskValueAngst50 }
     [SerializeField] TaskFearValues taskFearValue;
@@ -33,6 +36,8 @@ public class GhostObjects : MonoBehaviour
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
         thisObjectAngstValue = StartupAngstValues();
         thisObjectTimeValue = StartupTimeValues();
+        standartSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     int StartupAngstValues() {
@@ -108,8 +113,10 @@ public class GhostObjects : MonoBehaviour
     void TaskCompleted() {
         ChangeFearLevel(-thisObjectAngstValue);
         objectIsHaunted = false;
-        StartCoroutine(FadeObjectOut(false));
+        //StartCoroutine(FadeObjectOut(false));
         canvas.SetActive(false);
+        spriteRenderer.sprite = standartSprite;
+
     }
     public void ChangeFearLevel(int fearChangeValue) {
         fearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
@@ -120,7 +127,8 @@ public class GhostObjects : MonoBehaviour
 
     public void GhostInteraction() {
         objectIsHaunted = true;
-        StartCoroutine(FadeObjectOut(true));
+        spriteRenderer.sprite = hauntedSprite;
+        //StartCoroutine(FadeObjectOut(true));
         StartCoroutine(WaitingForGirlfriend());
     }
 
@@ -128,7 +136,6 @@ public class GhostObjects : MonoBehaviour
         if (objectIsHaunted) {
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
-                    Debug.Log("Girlfriend in Range 2");
                     ChangeFearLevel(thisObjectAngstValue);
                     StartCoroutine(FadeObjectOut(false));
                     objectIsHaunted = false;
@@ -147,19 +154,35 @@ public class GhostObjects : MonoBehaviour
     IEnumerator FadeObjectOut(bool fadeOut) {
         SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
         Color color = sprite.color;
+        float alpha = color.a;
 
-        if (!fadeOut) {
-            while (color.a < 1f) {
-                color.a += Time.deltaTime / fadeOutTime;
-                sprite.color = color;
+        if(fadeOut) {
+            for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
+
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, fadeOutMin, t));
+                this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
             }
         }
         else {
-            while (color.a >= fadeOutMin) {
-                color.a -= Time.deltaTime / fadeOutTime;
-                this.gameObject.GetComponent<SpriteRenderer>().color = color;
+            for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+                this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
             }
         }
+
+        //if (!fadeOut) {
+        //    while (color.a < 1f) {
+        //        color.a += Time.deltaTime / fadeOutTime;
+        //        sprite.color = color;
+        //    }
+        //}
+        //else {
+        //    while (color.a >= fadeOutMin) {
+        //        color.a -= Time.deltaTime / fadeOutTime;
+        //        this.gameObject.GetComponent<SpriteRenderer>().color = color;
+        //    }
+        //}
+
         yield return null;
     }
 

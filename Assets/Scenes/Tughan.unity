@@ -1249,11 +1249,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6806497643597920349, guid: ea01dcefb0f6f564299b49fdca538601, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.22
+      value: -4.94
       objectReference: {fileID: 0}
     - target: {fileID: 6806497643597920349, guid: ea01dcefb0f6f564299b49fdca538601, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.61
+      value: -1.88
       objectReference: {fileID: 0}
     - target: {fileID: 6806497643597920349, guid: ea01dcefb0f6f564299b49fdca538601, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1491,6 +1491,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3067226173569862091, guid: a5e3baeb39cfcfe4d960bb59be2b1283, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4622878792310537268, guid: a5e3baeb39cfcfe4d960bb59be2b1283, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.7639
@@ -1563,6 +1567,10 @@ PrefabInstance:
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBox (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615184361241733507, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: fadeOutTime
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 9196438205773441071, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_LocalPosition.x
