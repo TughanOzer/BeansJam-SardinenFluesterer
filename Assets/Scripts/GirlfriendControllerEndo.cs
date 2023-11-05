@@ -11,7 +11,7 @@ public class GirlfriendControllerEndo : MonoBehaviour
     private float _currentStationTimer = 0;
     private int _currentTargetIndex = 0;
 
-    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _speed = 0.003f;
     [SerializeField] private GirlfriendStation _startStation;
 
     #endregion
@@ -54,7 +54,7 @@ public class GirlfriendControllerEndo : MonoBehaviour
             var distance = Vector2.Distance(target, (Vector2)transform.position);
             var direction = target - (Vector2)transform.position;
 
-            if (distance > 0.5f)
+            if (distance > 0.1f)
                 transform.Translate(direction.normalized * _speed);
             else
                 _currentTargetIndex++;
