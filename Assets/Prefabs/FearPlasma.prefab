@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 2770160475883787836}
   - component: {fileID: 1060483764263604924}
   m_Layer: 0
-  m_Name: PlaceholderItem
+  m_Name: FearPlasma
   m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -863,8 +863,8 @@ MonoBehaviour:
   timeRemaining: {fileID: 7997001610925781920}
   slider: {fileID: 4522620147418656965}
   canvas: {fileID: 193745121820360322}
-  taskFearValue: 2
-  taskTimeValue: 2
+  taskFearValue: 0
+  taskTimeValue: 0
   objectIsHaunted: 0
   fadeOutTime: 2
   fadeOutMin: 0.25
