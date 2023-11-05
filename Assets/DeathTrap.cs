@@ -152,6 +152,7 @@ public class DeathTrap : MonoBehaviour
     {
         _timerImage.sprite = _timerSprites[0];
     }
+
     #endregion
 
 
