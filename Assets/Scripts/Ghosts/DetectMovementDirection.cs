@@ -20,7 +20,7 @@ public class DetectMovementDirection : MonoBehaviour
         var currentPosition = transform.position;
         var difference = currentPosition - lastPosition;
 
-        if (difference.x == 0.0f && difference.y == 0.0f)
+        if (Mathf.Abs(difference.x) == 0.00f && Mathf.Abs(difference.y) == 0.00f)
         {
             animator.SetBool("moving", false);
 
@@ -30,13 +30,20 @@ public class DetectMovementDirection : MonoBehaviour
         }
         else { 
             animator.SetBool("moving", true);
-            Debug.Log($"{Mathf.Abs(difference.x)}, {Mathf.Abs(difference.y)}");
+            
             if (Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
+            {
                 animator.SetFloat("Move x", difference.x);
-            else
+                animator.SetFloat("Move y", 0);
+            }
+            else { 
                 animator.SetFloat("Move y", difference.y);
+                animator.SetFloat("Move x", 0);
+            }
+                
         }
 
+        Debug.Log($"{gameObject.name}: {Mathf.Abs(difference.x)}, {Mathf.Abs(difference.y)}");
         lastPosition = currentPosition;
 
         Invoke("CheckMovement", .1f);
