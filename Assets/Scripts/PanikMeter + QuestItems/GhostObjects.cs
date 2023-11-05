@@ -69,8 +69,8 @@ public class GhostObjects : MonoBehaviour
             canvas.SetActive(true);
             StartCoroutine(Timer(thisObjectTimeValue));
         }
-        else if (collision.GetComponent<Ghost>()) {
-            //Evtl nicht nötig
+        else if (collision.TryGetComponent(out Ghost ghost)) {
+            ghost.SetWaitTime(thisObjectTimeValue);
         }
         else if (collision.GetComponent<GirlfriendController>()) {
             girlfriendInRange = true;
