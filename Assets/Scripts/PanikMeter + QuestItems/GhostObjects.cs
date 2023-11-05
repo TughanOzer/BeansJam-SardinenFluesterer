@@ -14,66 +14,28 @@ public class GhostObjects : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeRemaining;
     [SerializeField] Slider slider;
     [SerializeField] GameObject canvas;
-    [SerializeField] Sprite hauntedSprite;
-    [SerializeField] Sprite standartSprite;
+    Sprite standartSprite;
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] enum TaskFearValues { taskValueAngst10, taskValueAngst25, taskValueAngst50 }
-    [SerializeField] TaskFearValues taskFearValue;
-    [SerializeField] enum TaskTimeValues { taskValueTime1, taskValueTime2, taskValueTime3 }
-    [SerializeField] TaskTimeValues taskTimeValue;
+    [SerializeField] GOValues goValues;
 
-    public class TaskValues {
-        public static int taskAngstValue10 = 10, taskAngstValue25 = 25, taskAngstValue35 = 50;
-        public static float taskTime1 = 3f, taskTime2 = 5f, taskTime3 = 8f;
-    }
     int fearValue;
-    int thisObjectAngstValue;
-    float thisObjectTimeValue;
     bool objectIsHaunted = false;
 
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
-        thisObjectAngstValue = StartupAngstValues();
-        thisObjectTimeValue = StartupTimeValues();
         standartSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-    }
-
-    int StartupAngstValues() {
-        switch (taskFearValue) {
-            case TaskFearValues.taskValueAngst10:
-                return TaskValues.taskAngstValue10;
-            case TaskFearValues.taskValueAngst25: 
-                return TaskValues.taskAngstValue25;
-            case TaskFearValues.taskValueAngst50:
-                return TaskValues.taskAngstValue35;
-            default:
-                return 0;
-        }
-    }
-
-    float StartupTimeValues() {
-        switch (taskTimeValue) {
-            case TaskTimeValues.taskValueTime1:
-                return TaskValues.taskTime1;
-            case TaskTimeValues.taskValueTime2:
-                return TaskValues.taskTime2;
-            case TaskTimeValues.taskValueTime3:
-                return TaskValues.taskTime3;
-            default:
-                return 0;
-        }
     }
 
     bool girlfriendInRange = false;
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.GetComponent<PlayerController2D>() && objectIsHaunted) {
             canvas.SetActive(true);
-            StartCoroutine(Timer(thisObjectTimeValue));
+            StartCoroutine(Timer(goValues.taskTime));
         }
         else if (collision.TryGetComponent(out Ghost ghost)) {
-            ghost.SetWaitTime(thisObjectTimeValue);
+            ghost.SetWaitTime(goValues.taskTime);
         }
         else if (collision.GetComponent<GirlfriendControllerEndo>()) {
             girlfriendInRange = true;
@@ -110,9 +72,8 @@ public class GhostObjects : MonoBehaviour
     }
 
     void TaskCompleted() {
-        ChangeFearLevel(-thisObjectAngstValue);
+        ChangeFearLevel(-goValues.taskAngstValue);
         objectIsHaunted = false;
-        //StartCoroutine(FadeObjectOut(false));
         canvas.SetActive(false);
         spriteRenderer.sprite = standartSprite;
 
@@ -126,8 +87,7 @@ public class GhostObjects : MonoBehaviour
 
     public void GhostInteraction() {
         objectIsHaunted = true;
-        spriteRenderer.sprite = hauntedSprite;
-        //StartCoroutine(FadeObjectOut(true));
+        spriteRenderer.sprite = goValues.hauntedSprite;
         StartCoroutine(WaitingForGirlfriend());
     }
 
@@ -135,9 +95,9 @@ public class GhostObjects : MonoBehaviour
         if (objectIsHaunted) {
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
-                    ChangeFearLevel(thisObjectAngstValue);
-                    //StartCoroutine(FadeObjectOut(false));
+                    ChangeFearLevel(goValues.taskAngstValue);
                     objectIsHaunted = false;
+                    spriteRenderer.sprite = standartSprite;
                     girlfriendInRange = false;
                     yield return null;
                 } 
@@ -145,28 +105,5 @@ public class GhostObjects : MonoBehaviour
             }
         }
     }
-
-    //[SerializeField] float fadeOutTime = 2f;
-    //[SerializeField] float fadeOutMin = 0.25f;
-    //IEnumerator FadeObjectOut(bool fadeOut) {
-    //    SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
-    //    Color color = sprite.color;
-    //    float alpha = color.a;
-
-    //    if(fadeOut) {
-    //        for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
-
-    //            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, fadeOutMin, t));
-    //            this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
-    //        }
-    //    }
-    //    else {
-    //        for (float t = 0.0f; t < 1f; t += Time.deltaTime / fadeOutTime) {
-    //            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
-    //            this.gameObject.GetComponent<SpriteRenderer>().material.color = newColor;
-    //        }
-    //    }
-    //    yield return null;
-    //}
 
 }
