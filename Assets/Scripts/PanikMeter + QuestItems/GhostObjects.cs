@@ -40,7 +40,7 @@ public class GhostObjects : MonoBehaviour
             StartCoroutine(Timer(goValues.taskTime));
         }
         else if (col.TryGetComponent(out Ghost ghost)) {
-            //Temporär
+            //Temporäre Notlösung
             GhostInteraction();
             //
             ghost.SetWaitTime(goValues.taskTime);
@@ -91,9 +91,6 @@ public class GhostObjects : MonoBehaviour
     public void ChangeFearLevel(int fearChangeValue) {
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
         localFearValue += fearChangeValue;
-        // das hier raus
-        //fearDisplay.text = "Fear: " + localFearValue;
-        //fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
     }
 
     public void GhostInteraction() {
