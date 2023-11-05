@@ -61,7 +61,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &2201989547330883193
 MonoBehaviour:
@@ -859,13 +859,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fb775c2241635448ac13908904d0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fearDisplay: {fileID: 0}
   timeRemaining: {fileID: 7997001610925781920}
   slider: {fileID: 4522620147418656965}
   canvas: {fileID: 193745121820360322}
   taskFearValue: 2
   taskTimeValue: 2
-  objectIsHaunted: 0
   fadeOutTime: 2
   fadeOutMin: 0.25
 --- !u!114 &2770160475883787836
