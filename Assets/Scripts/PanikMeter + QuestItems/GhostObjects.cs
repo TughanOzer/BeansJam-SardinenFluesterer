@@ -28,8 +28,9 @@ public class GhostObjects : MonoBehaviour
 
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
-        standartSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        standartSprite = spriteRenderer.sprite;
+        
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -39,6 +40,9 @@ public class GhostObjects : MonoBehaviour
             StartCoroutine(Timer(goValues.taskTime));
         }
         else if (col.TryGetComponent(out Ghost ghost)) {
+            //Temporär
+            GhostInteraction();
+            //
             ghost.SetWaitTime(goValues.taskTime);
         }
         else if (col.GetComponent<GirlfriendControllerEndo>()) {
@@ -88,8 +92,8 @@ public class GhostObjects : MonoBehaviour
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
         localFearValue += fearChangeValue;
         // das hier raus
-        fearDisplay.text = "Fear: " + localFearValue;
-        fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
+        //fearDisplay.text = "Fear: " + localFearValue;
+        //fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
     }
 
     public void GhostInteraction() {
