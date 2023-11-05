@@ -54,7 +54,7 @@ MonoBehaviour:
   _floatAmplitude: 0.66
   _ectoplasmChance: 1
   _floatEase: 10
-  _ectoplasmPrefab: {fileID: 2046949743919438208, guid: 86b4693d0f8ff1344bc149d3b43a9e2b, type: 3}
+  _ectoplasmPrefab: {fileID: 7680559559716127459, guid: a02cdd7ed097056449770d27719ca948, type: 3}
 --- !u!70 &2246749405416433198
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1926311615
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 814210426, guid: 7c61626176a6030419352755c542d21f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

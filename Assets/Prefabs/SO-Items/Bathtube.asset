@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b18a14800e37a041abb8ecf9278de9c, type: 3}
   m_Name: Bathtube
   m_EditorClassIdentifier: 
-  taskAngstValue: 0
+  taskAngstValue: 20
   taskTime: 7
   hauntedSprite: {fileID: 21300000, guid: 9655444caab15784db3ba5c1f9016e4c, type: 3}
   playerCleaning: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}

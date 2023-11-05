@@ -91,7 +91,7 @@ public class GhostObjects : MonoBehaviour
     public void ChangeFearLevel(int fearChangeValue) {
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
         localFearValue += fearChangeValue;
-
+        Debug.Log(localFearValue);
         fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = localFearValue;
     }
 
