@@ -26,17 +26,24 @@ public class WinLoseHandler : MonoBehaviour
     private void OnEnable()
     {
         DeathTrap.OnDeathTrapTriggered += FadeInLoseImage;
+        FearMeter.OnHappinessMax += FadeInWinImage;
+        FearMeter.OnFearMax += FadeInLoseImage;
     }
 
     private void OnDisable()
     {
         DeathTrap.OnDeathTrapTriggered -= FadeInLoseImage;
+        FearMeter.OnHappinessMax -= FadeInWinImage;
+        FearMeter.OnFearMax -= FadeInLoseImage;
     }
 
     private void Update()
     {
         if (_endStateReached && Input.anyKeyDown)
+        {
+            PauseControl.ResumeGame();
             LoadHelper.LoadSceneWithLoadingScreen(SceneName.MainMenu);
+        }
     }
 
     private void FadeInLoseImage()
@@ -51,7 +58,9 @@ public class WinLoseHandler : MonoBehaviour
 
     private void EndStateReached()
     {
+        PauseControl.PauseGame();
         _endStateReached = true;
     }
+
     #endregion
 }

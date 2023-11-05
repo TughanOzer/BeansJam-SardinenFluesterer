@@ -31,21 +31,6 @@ public class Ghost : MonoBehaviour
 
     const string INTERACTABLE_OBJECT_TAG = "InteractableObject";
     const string PATHLOGIC_TILE_TAG = "PathLogicTile";
-    
-    /*
-     * Interactable Objects:
-     * Doors - for setting a trap
-     * Flower pots
-     * Bath Tub
-     * Windows
-     * Fireplaces
-     * Teddy
-     * Armor
-     * Furniture
-     * 
-     * Object independent Actions:
-     * Ectoplasma on tile -> chance when crossing a valid tile? Tile layer with trigger Collider
-     */
 
     #endregion
 
@@ -63,8 +48,7 @@ public class Ghost : MonoBehaviour
 
     private void Awake()
     {
-        _visuals = transform.GetChild(0);
-        _visualRenderer = GetComponentInChildren<SpriteRenderer>();
+        _visualRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
