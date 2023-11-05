@@ -27,6 +27,7 @@ public class GhostObjects : MonoBehaviour
     int fearValue;
     int thisObjectAngstValue;
     float thisObjectTimeValue;
+    [SerializeField] bool objectIsHaunted = false;
 
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
@@ -62,7 +63,9 @@ public class GhostObjects : MonoBehaviour
 
     bool girlfriendInRange = false;
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.GetComponent<PlayerController2D>()) {
+
+        Debug.Log("TriggerEnter");
+        if (collision.GetComponent<PlayerController2D>() && objectIsHaunted) {
             canvas.SetActive(true);
             StartCoroutine(Timer(thisObjectTimeValue));
         }
@@ -87,7 +90,7 @@ public class GhostObjects : MonoBehaviour
     IEnumerator Timer(float secondsleft) {
         float secondsleftValue = secondsleft;
         slider.maxValue = secondsleftValue;
-        while (secondsleft >= -1) {
+        while (secondsleft >= -1 && objectIsHaunted) {
             if (Input.GetKey(KeyCode.E) && secondsleft > 0) {
                 float seconds = Mathf.FloorToInt(secondsleft);
                 secondsleft -= Time.deltaTime;
@@ -106,9 +109,8 @@ public class GhostObjects : MonoBehaviour
     void TaskCompleted() {
         Debug.Log("TaskDone");
         ChangeFearLevel(-thisObjectAngstValue);
-        //item fade in, bisher destroy
         objectIsHaunted = false;
-        Destroy(this.gameObject);
+        StartCoroutine(FadeObjectOut(false));
     }
     public void ChangeFearLevel(int fearChangeValue) {
         fearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
@@ -117,11 +119,10 @@ public class GhostObjects : MonoBehaviour
         fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = fearValue;
     }
 
-    bool objectIsHaunted = false;
     public void GhostInteraction() {
         objectIsHaunted = true;
-        StartCoroutine(FadeObjectOut(false));
-        StartCoroutine(WaitingForGirlfriend());
+        StartCoroutine(FadeObjectOut(true));
+        //StartCoroutine(WaitingForGirlfriend());
     }
 
     IEnumerator WaitingForGirlfriend() {
@@ -129,31 +130,39 @@ public class GhostObjects : MonoBehaviour
             while (objectIsHaunted) {
                 if (girlfriendInRange) {
                     ChangeFearLevel(thisObjectAngstValue);
-                    StartCoroutine(FadeObjectOut(true));
+                    StartCoroutine(FadeObjectOut(false));
                     objectIsHaunted = false;
                     girlfriendInRange = false;
                     yield return null;
                 }
+                else yield return null;
             }
         }
-        else yield return null;
     }
 
     [SerializeField] float fadeOutTime = 2f;
     [SerializeField] float fadeOutMin = 0.25f;
-    IEnumerator FadeObjectOut(bool invert) {
+    IEnumerator FadeObjectOut(bool fadeOut) {
+        Debug.Log("Fadeout1");
         SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
         Color color = sprite.color;
-        if (!invert) {
-            while (color.a > 1f) {
+
+        //FadeIN
+        if (!fadeOut) {
+            Debug.Log("fadeInMin0: " + color.a);
+            while (color.a < 1f) {
                 color.a += Time.deltaTime / fadeOutTime;
                 sprite.color = color;
             }
         }
+
+        //FadeOUT
         else {
-            while (color.a > fadeOutMin) {
+            Debug.Log("FadeOUT2");
+            while (color.a >= fadeOutMin) {
+                Debug.Log("FadeIn: " + color.a);
                 color.a -= Time.deltaTime / fadeOutTime;
-                sprite.color = color;
+                this.gameObject.GetComponent<SpriteRenderer>().color = color;
             }
         }
         yield return null;
