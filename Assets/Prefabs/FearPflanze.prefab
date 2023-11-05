@@ -104,7 +104,7 @@ MonoBehaviour:
   timeRemaining: {fileID: 6772716465803623452}
   slider: {fileID: 992225860351508345}
   canvas: {fileID: 3582289212886348094}
-  goValues: {fileID: 0}
+  goValues: {fileID: 11400000, guid: 00b6e1f277e7785458e6853e4c52ad75, type: 2}
   audioSource: {fileID: 0}
 --- !u!58 &1060483764263604924
 CircleCollider2D:
