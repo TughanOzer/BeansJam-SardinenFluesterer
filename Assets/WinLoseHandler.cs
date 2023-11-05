@@ -51,7 +51,8 @@ public class WinLoseHandler : MonoBehaviour
         _loseBanner.DOFade(1, 3f).OnComplete(EndStateReached);
     }
 
-    private void FadeInWinImage()
+    //auf public gesetzt
+    public void FadeInWinImage()
     {
         _winBanner.DOFade(1, 3f).OnComplete(EndStateReached);
     }

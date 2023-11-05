@@ -59,8 +59,9 @@ public class FearMeter : MonoBehaviour
 
     private void Update()
     {
-        //_fearMeter.value = -_fearLevel.globalFearValu;
-
+        //Temporär wieder entkommentiert
+        _fearMeter.value = -_fearLevel.globalFearValu;
+        //
         if (_fearMeter.value >= _winValue)
             OnHappinessMax?.Invoke();
         else if (_fearMeter.value >= _happyThreshold)
