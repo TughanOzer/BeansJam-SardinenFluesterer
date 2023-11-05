@@ -10,7 +10,7 @@ public class GhostObjects : MonoBehaviour
 {
     public event EventHandler OnGhostInteraction;
 
-    [SerializeField] TextMeshProUGUI fearDisplay;
+    TextMeshProUGUI fearDisplay;
     [SerializeField] TextMeshProUGUI timeRemaining;
     [SerializeField] Slider slider;
     [SerializeField] GameObject canvas;
@@ -27,7 +27,7 @@ public class GhostObjects : MonoBehaviour
     int fearValue;
     int thisObjectAngstValue;
     float thisObjectTimeValue;
-    [SerializeField] bool objectIsHaunted = false;
+    bool objectIsHaunted = false;
 
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
@@ -107,10 +107,10 @@ public class GhostObjects : MonoBehaviour
     }
 
     void TaskCompleted() {
-        Debug.Log("TaskDone");
         ChangeFearLevel(-thisObjectAngstValue);
         objectIsHaunted = false;
         StartCoroutine(FadeObjectOut(false));
+        canvas.SetActive(false);
     }
     public void ChangeFearLevel(int fearChangeValue) {
         fearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
