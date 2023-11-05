@@ -15,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Ghosts
-  - 
+  - GFinteractable
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Furniture
+    uniqueID: 1172503989
     locked: 0
   - name: Interactables
     uniqueID: 2642927675
