@@ -112,6 +112,7 @@ public class GhostObjects : MonoBehaviour
         fearDisplay.text = "Fear: " + fearValue;
         fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu = fearValue;
     }
+
     public void PlayerInteraction() {
         
     }

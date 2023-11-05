@@ -21,13 +21,13 @@ public class Ghost : MonoBehaviour
 
     [SerializeField] private GameObject _ectoplasmPrefab;
 
-
     private int _objectIndex;
     private List<GameObject> _possibleInteractions = new();
     private GameObject _nextInteractionObject;
     private bool _isAtTargetObject;
     private Transform _visuals;
     private SpriteRenderer _visualRenderer;
+    private float _waitTime = 0;
 
     const string INTERACTABLE_OBJECT_TAG = "InteractableObject";
     const string PATHLOGIC_TILE_TAG = "PathLogicTile";
@@ -109,7 +109,24 @@ public class Ghost : MonoBehaviour
         else
         {
             _isAtTargetObject = true;
-        }        
+        }   
+        
+        if (_isAtTargetObject)
+        {
+            if (_waitTime > 0)
+            {
+                _waitTime -= Time.deltaTime;
+            }
+            else
+            {
+                _isAtTargetObject = false;
+                _waitTime = 0;
+                SetInteractionTarget();
+            }
+
+        }
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -148,5 +165,9 @@ public class Ghost : MonoBehaviour
         OnExorcism?.Invoke(objectIndex);
     }
 
+    public void SetWaitTime(float time)
+    {
+        _waitTime = time;
+    }
     #endregion
 }

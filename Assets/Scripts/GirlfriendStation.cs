@@ -40,7 +40,7 @@ public class GirlfriendStation : MonoBehaviour
 
     public List<Transform> GetSortedRoute(Transform girlfriendTransform)
     {
-        List<Transform> chosenPath = new();
+        //List<Transform> chosenPath = new();
 
         int randomIndex = UnityEngine.Random.Range(0, ViableRoutes.Count);
         var unsortedRoute = ViableRoutes[randomIndex];
@@ -83,9 +83,7 @@ public class GirlfriendStation : MonoBehaviour
 
         #endregion
 
-        Debug.Log(chosenPath.Count);
-        chosenPath = unsortedRoute;
-        return chosenPath;
+        return unsortedRoute;
     }
 
     #endregion
