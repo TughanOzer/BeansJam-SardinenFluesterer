@@ -25,11 +25,17 @@ public class GirlfriendStation : MonoBehaviour
 
     private void Start()
     {
-        ViableRoutes.Add(route1);
-        ViableRoutes.Add(route2);
-        ViableRoutes.Add(route3);
-        ViableRoutes.Add(route4);
-        ViableRoutes.Add(route5);
+        if (route1.Count > 0)
+            ViableRoutes.Add(route1);
+        if (route2.Count > 0)
+            ViableRoutes.Add(route2);
+        if (route3.Count > 0)
+            ViableRoutes.Add(route3);
+        if (route4.Count > 0)
+            ViableRoutes.Add(route4);
+        if (route5.Count > 0)
+            ViableRoutes.Add(route5);
+        
     }
 
     public List<Transform> GetSortedRoute(Transform girlfriendTransform)
@@ -39,6 +45,8 @@ public class GirlfriendStation : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, ViableRoutes.Count);
         var unsortedRoute = ViableRoutes[randomIndex];
 
+        #region Removed Sort
+        /*
         foreach (var waypoint in unsortedRoute)
         {
             var distance = Vector2.Distance(waypoint.position, girlfriendTransform.position);
@@ -71,9 +79,12 @@ public class GirlfriendStation : MonoBehaviour
                 }
             }      
         }
+        */
+
+        #endregion
 
         Debug.Log(chosenPath.Count);
-
+        chosenPath = unsortedRoute;
         return chosenPath;
     }
 
