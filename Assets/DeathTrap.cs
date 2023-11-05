@@ -39,6 +39,7 @@ public class DeathTrap : MonoBehaviour
     {
         var renderer = GetComponent<SpriteRenderer>();
         renderer.DOFade(0, 0.01f);
+        _timerImage.DOFade(0, 0.01f);
 
         _disarmingIncrements = _disarmingTime / 6;
         _armingIncrements = _armingTime / 6;
@@ -68,9 +69,14 @@ public class DeathTrap : MonoBehaviour
     private void Update()
     {
         if ((_isBeingDisarmed && Input.GetKey(KeyCode.E)) || _isBeingArmed)
+        {
+            _timerImage.DOFade(1, 0.01f);
             _timer -= Time.deltaTime;
+        }
         else
+        {
             _timer = 0;
+        }
 
         if (_timer > 0)
         {
