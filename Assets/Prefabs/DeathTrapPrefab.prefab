@@ -102,7 +102,7 @@ MonoBehaviour:
   _disarmingTime: 3
   _armingTime: 5
   _isCleaver: 0
-  _timerImage: {fileID: 0}
+  _timerImage: {fileID: 6647187288796302750}
   _timerSprites: []
 --- !u!58 &19237235117673998
 CircleCollider2D:
@@ -199,7 +199,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &7431772629537295077
 MonoBehaviour:
@@ -268,14 +268,14 @@ RectTransform:
   m_GameObject: {fileID: 7089669740962925159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7416563807994256904}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.03}
+  m_AnchoredPosition: {x: 0, y: -0.222}
   m_SizeDelta: {x: 48, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4549630139831576405
