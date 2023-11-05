@@ -14,6 +14,9 @@ public class GirlfriendStation : MonoBehaviour
     private List<List<Transform>> ViableRoutes = new();
     [SerializeField] private List<Transform> route1 = new();
     [SerializeField] private List<Transform> route2 = new();
+    [SerializeField] private List<Transform> route3 = new();
+    [SerializeField] private List<Transform> route4 = new();
+    [SerializeField] private List<Transform> route5 = new();
     [field: SerializeField] public float StationStayDuration { get; private set; } = 30f;
 
     #endregion
@@ -24,6 +27,9 @@ public class GirlfriendStation : MonoBehaviour
     {
         ViableRoutes.Add(route1);
         ViableRoutes.Add(route2);
+        ViableRoutes.Add(route3);
+        ViableRoutes.Add(route4);
+        ViableRoutes.Add(route5);
     }
 
     public List<Transform> GetSortedRoute(Transform girlfriendTransform)

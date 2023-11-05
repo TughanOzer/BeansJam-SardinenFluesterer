@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3705762549357976891}
   - component: {fileID: -5996083673493470355}
   - component: {fileID: 7580397068427204348}
+  - component: {fileID: 4499157042932788254}
   m_Layer: 0
   m_Name: Girlfriend
   m_TagString: Untagged
@@ -101,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1926311615
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 899501654, guid: 6785de8df73f5fe469f06bace0655355, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,3 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+--- !u!114 &4499157042932788254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127288998327098949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5322dbce421da524d80038e6b2ccd35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3
+  _startStation: {fileID: 0}
