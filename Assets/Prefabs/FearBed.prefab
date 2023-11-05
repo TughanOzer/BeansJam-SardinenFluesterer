@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 31bce250536c42f4aa91d29435d78f26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,10 +102,7 @@ MonoBehaviour:
   timeRemaining: {fileID: 2888557744805836077}
   slider: {fileID: 8660046468272764488}
   canvas: {fileID: 4926211523325392911}
-  hauntedSprite: {fileID: 21300000, guid: 78d1691e090a1af409fa02550db7f58a, type: 3}
   goValues: {fileID: 11400000, guid: fb9cc217bd6e47541aa4e11ea8ed263f, type: 2}
-  taskFearValue: 2
-  taskTimeValue: 2
 --- !u!58 &1060483764263604924
 CircleCollider2D:
   m_ObjectHideFlags: 0
