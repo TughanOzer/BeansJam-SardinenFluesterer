@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
 {
     #region Fields and Properties
 
-    public static AudioManager Instance { get; private set; }
+    public static AudioManager Instance;
 
     [field: SerializeField] public AudioMixer MasterMixer { get; private set; }
     [field: SerializeField] public float MasterVolume { get; private set; } = 1;
@@ -28,20 +28,26 @@ public class AudioManager : MonoBehaviour
      
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
+        
+
+        if(Instance != null)
         {
             Destroy(gameObject);
-        }
+            return;
+        } 
+        Instance = this;
+        DontDestroyOnLoad(this);
 
-        //Sets start volumes if the should be adjusted immediately
-        Instance.SetMasterVolume(MasterVolume);
-        Instance.SetMusicVolume(MusicVolume);
-        Instance.SetSoundVolume(SoundVolume, false);
+    }
+    private void Start()
+    {
+        if(AudioManager.Instance != null)
+        {
+            //Sets start volumes if the should be adjusted immediately
+            SetMasterVolume(AudioManager.Instance.MasterVolume);
+            SetMusicVolume(AudioManager.Instance.MusicVolume);
+            SetSoundVolume(AudioManager.Instance.SoundVolume, false);
+        }
     }
 
     public void FadeInGameTrack(AudioSource audioSource)
