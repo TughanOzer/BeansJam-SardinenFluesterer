@@ -25,9 +25,15 @@ public class PauseMenu : MonoBehaviour
     {
         _settingsCanvas = GetComponent<Canvas>();
         _settingsCanvas.enabled = false;
-        _masterSlider.onValueChanged.AddListener(SetMasterVolume);
-        _musicSlider.onValueChanged.AddListener(SetMusicVolume);
-        _soundSlider.onValueChanged.AddListener(SetSoundVolume);
+
+        _masterSlider.value = AudioManager.Instance.MasterVolume;
+        _musicSlider.value = AudioManager.Instance.MusicVolume;
+        _soundSlider.value = AudioManager.Instance.SoundVolume;
+
+        //_masterSlider.onValueChanged.AddListener(SetMasterVolume);
+        //_musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        //_soundSlider.onValueChanged.AddListener(SetSoundVolume);
+
     }
 
     private void Update()
@@ -43,25 +49,21 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseControl.PauseGame();
                 _settingsCanvas.enabled = true;
-
-                _masterSlider.value = AudioManager.Instance.MasterVolume;
-                _musicSlider.value = AudioManager.Instance.MusicVolume;
-                _soundSlider.value = AudioManager.Instance.SoundVolume;
             }
         }
     }
 
-    private void SetMasterVolume(float value)
+    public void SetMasterVolume(float value)
     {
         AudioManager.Instance.SetMasterVolume(value);
     }
 
-    private void SetMusicVolume(float value)
+    public void SetMusicVolume(float value)
     {
         AudioManager.Instance.SetMusicVolume(value);
     }
 
-    private void SetSoundVolume(float value)
+    public void SetSoundVolume(float value)
     {
         AudioManager.Instance.SetSoundVolume(value);
     }
