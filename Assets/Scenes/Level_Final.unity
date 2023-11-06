@@ -6389,12 +6389,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: removed
+      value: 
+      objectReference: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}
+    - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: triggered
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b61145bf03669d41828486e60eecc3e, type: 3}
+    - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
       propertyPath: _isCleaver
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5142459733979548097, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
       propertyPath: m_Name
       value: Cleaver1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182095501468912213, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182095501468912213, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0b61145bf03669d41828486e60eecc3e, type: 3}
+    - target: {fileID: 5182095501468912213, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7644156966733123504, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14772,6 +14792,10 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
+    - target: {fileID: 1060483764263604924, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: m_Radius
+      value: 0.62
+      objectReference: {fileID: 0}
     - target: {fileID: 5551648861224223420, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -15679,6 +15703,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: removed
+      value: 
+      objectReference: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}
     - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
       propertyPath: _isCleaver
       value: 1
@@ -18110,7 +18138,7 @@ Transform:
   m_GameObject: {fileID: 1753472495}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.177251, y: 3.4743223, z: -0.49356863}
+  m_LocalPosition: {x: 4.324, y: 3.43, z: -0.49356863}
   m_LocalScale: {x: 1.1591, y: 1.1591, z: 1.1591}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19954,7 +19982,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.16248317}
+  m_Offset: {x: 0, y: 0.25478667}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19965,7 +19993,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.23, y: 0.16101244}
+  m_Size: {x: 0.23, y: 0.38656378}
   m_EdgeRadius: 0
 --- !u!212 &2111563220
 SpriteRenderer:
@@ -20007,7 +20035,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1324062355, guid: c562f637bbdb9b94bb95e50418800663, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -20028,7 +20056,7 @@ Transform:
   m_GameObject: {fileID: 2111563218}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.3188496, y: 2.3512225, z: -0.49356863}
+  m_LocalPosition: {x: -3.124, y: 3.71, z: -0.49356863}
   m_LocalScale: {x: 1, y: 0.875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20142,6 +20170,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
+      propertyPath: removed
+      value: 
+      objectReference: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}
     - target: {fileID: 5098541775481628533, guid: e547fff2d79d87845af1f37a345e41bb, type: 3}
       propertyPath: _isCleaver
       value: 1

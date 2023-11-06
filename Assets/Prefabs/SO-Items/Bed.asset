@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b18a14800e37a041abb8ecf9278de9c, type: 3}
   m_Name: Bed
   m_EditorClassIdentifier: 
-  taskAngstValue: 14
+  taskAngstValue: 10
   taskTime: 1
   hauntedSprite: {fileID: 21300000, guid: 78d1691e090a1af409fa02550db7f58a, type: 3}
   playerCleaning: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}

@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,12 @@ public class DeathTrap : MonoBehaviour
 {
     #region Fields and Properties
 
-    [SerializeField] private float _disarmingTime = 3;
+    AudioSource sound;
+    [SerializeField] AudioClip arming;
+    [SerializeField] AudioClip removed;
+    [SerializeField] AudioClip triggered;
+
+    [SerializeField] private float _disarmingTime = 1;
     [SerializeField] private float _armingTime = 5;
     [SerializeField] private bool _isCleaver;
 
@@ -24,6 +30,7 @@ public class DeathTrap : MonoBehaviour
     private bool _isBeingArmed;
     private bool _isBeingDisarmed;
     private bool _isArmed;
+    bool playerInRange = false;
 
     #endregion
 
@@ -37,6 +44,7 @@ public class DeathTrap : MonoBehaviour
 
     private void Start()
     {
+        sound = GetComponent<AudioSource>(); 
         var renderer = GetComponent<SpriteRenderer>();
         renderer.DOFade(0, 0.01f);
         _timerImage.DOFade(0, 0.01f);
@@ -50,13 +58,15 @@ public class DeathTrap : MonoBehaviour
         if (collision.TryGetComponent(out Ghost ghost) && !_isArmed && !_isBeingArmed && !_isBeingDisarmed)
         {
             _isBeingArmed = true;
+
+            sound.PlayOneShot(arming);
             ghost.SetWaitTime(_armingTime);
             _timer = _armingTime;
         }
 
-        if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed && Input.GetKey(KeyCode.E))
+        if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed)
         {
-            _isBeingDisarmed = true;
+            playerInRange = true;
             _timer = _disarmingTime;
         }
 
@@ -68,14 +78,23 @@ public class DeathTrap : MonoBehaviour
 
     private void Update()
     {
-        if ((_isBeingDisarmed && Input.GetKey(KeyCode.E)) || _isBeingArmed)
-        {
-            _timerImage.DOFade(1, 0.01f);
-            _timer -= Time.deltaTime;
-        }
-        else
-        {
-            _timer = 0;
+        if (_timer != 0) { 
+
+            
+            if (_isBeingArmed) {
+                _timerImage.DOFade(1, 0.1f);
+                _timer -= Time.deltaTime;
+            }
+        
+            if (playerInRange && Input.GetKey(KeyCode.E))
+            {
+                _isBeingDisarmed = true;
+                _timer -= Time.deltaTime;
+                //if(_timer == 0) _isBeingDisarmed = true;
+
+                Debug.Log("Player disarming " + _timer);
+            }
+        
         }
 
         if (_timer > 0)
@@ -108,6 +127,7 @@ public class DeathTrap : MonoBehaviour
                 _isBeingDisarmed = false;
                 _isBeingArmed = false;
                 _isArmed = false;
+                //sound.PlayOneShot(removed);
                 InteractionFinished();
             }
             else if (_isBeingArmed)
@@ -123,15 +143,15 @@ public class DeathTrap : MonoBehaviour
     private void TriggerTrap()
     {
         if (_isCleaver)
-            transform.DOBlendableLocalMoveBy(new Vector3(0, 1, 0), 0.2f).OnComplete(GameOver);
+            transform.DOBlendableLocalMoveBy(new Vector3(0, -0.5f, 0), 0f).OnComplete(GameOver);
         else
             GameOver();
     }
 
     private void GameOver()
     {
-        //Play sound
-
+        sound.pitch = .5f;
+        sound.PlayOneShot(triggered);
         OnDeathTrapTriggered?.Invoke();
     }
 
@@ -149,9 +169,13 @@ public class DeathTrap : MonoBehaviour
         var renderer = GetComponent<SpriteRenderer>();
 
         if (_isArmed)
+        {
             renderer.DOFade(1, 1f);
+        }
         else
+        {
             renderer.DOFade(0, 1f);
+        }
     }
 
     private void ResetTimerImage()
