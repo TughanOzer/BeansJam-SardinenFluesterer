@@ -24,6 +24,7 @@ public class GhostObjects : MonoBehaviour
 
     int localFearValue;
     bool girlfriendInRange = false;
+    bool girlfriendShocked = false;
     bool objectIsHaunted = false;
 
     private void Start() {
@@ -39,7 +40,7 @@ public class GhostObjects : MonoBehaviour
             canvas.SetActive(true);
             StartCoroutine(Timer(goValues.taskTime));
         }
-        else if (col.TryGetComponent(out Ghost ghost)) {
+        else if (col.TryGetComponent(out Ghost ghost) && !objectIsHaunted) {
             //Temporäre Notlösung
             GhostInteraction();
             //
@@ -57,6 +58,7 @@ public class GhostObjects : MonoBehaviour
         }
         else if (col.GetComponent<GirlfriendController>()) {
             girlfriendInRange = false;
+            girlfriendShocked = false;
         }
     }
 
@@ -106,14 +108,14 @@ public class GhostObjects : MonoBehaviour
     IEnumerator WaitingForGirlfriend() {
         if (objectIsHaunted) {
             while (objectIsHaunted) {
-                if (girlfriendInRange) {
+                if (girlfriendInRange && !girlfriendShocked) {
                     ChangeFearLevel(-goValues.taskAngstValue);
                     audioSource.clip = goValues.girlfriendScream;
                     audioSource.Play();
 
-                    objectIsHaunted = false;
-                    spriteRenderer.sprite = standartSprite;
-                    girlfriendInRange = false;
+                    //objectIsHaunted = false;
+                    //spriteRenderer.sprite = standartSprite;
+                    girlfriendShocked = true;
                     yield return null;
                 } 
                 else yield return null;

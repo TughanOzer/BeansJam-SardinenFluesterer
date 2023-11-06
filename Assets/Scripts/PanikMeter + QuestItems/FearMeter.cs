@@ -14,8 +14,8 @@ public class FearMeter : MonoBehaviour
 
     [SerializeField] private Image _sliderHandle;
     [SerializeField] private Sprite _midSprite;
-    [SerializeField] private Sprite _happySprite;
     [SerializeField] private Sprite _fearfulSprite;
+    [SerializeField] private Sprite _happySprite;
 
     [SerializeField] private int _winValue = 1000;
     [SerializeField] private int _loseValue = -1000;
@@ -65,11 +65,11 @@ public class FearMeter : MonoBehaviour
         if (_fearMeter.value >= _winValue)
             OnHappinessMax?.Invoke();
         else if (_fearMeter.value >= _happyThreshold)
-            _sliderHandle.sprite = _happySprite;
+            _sliderHandle.sprite = _fearfulSprite;
         else if (_fearMeter.value <= _loseValue)
             OnFearMax?.Invoke();
         else if (_fearMeter.value <= _fearfulThreshold)
-            _sliderHandle.sprite = _fearfulSprite;
+            _sliderHandle.sprite = _happySprite;
         else
             _sliderHandle.sprite = _midSprite;
 
