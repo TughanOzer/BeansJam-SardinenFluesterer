@@ -86,5 +86,11 @@ public class GirlfriendStation : MonoBehaviour
         return unsortedRoute;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<GirlfriendControllerEndo>())
+            collision.GetComponent<AudioSource>().Play();
+    }
+
     #endregion
 }

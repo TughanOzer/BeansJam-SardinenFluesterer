@@ -17,8 +17,8 @@ public class FearMeter : MonoBehaviour
     [SerializeField] private Sprite _fearfulSprite;
     [SerializeField] private Sprite _happySprite;
 
-    [SerializeField] private int _winValue = 1000;
-    [SerializeField] private int _loseValue = -1000;
+    [SerializeField] public int _winValue;
+    [SerializeField, Tooltip("Must be negative.")] public int _loseValue;
 
     private float _happyThreshold;
     private float _fearfulThreshold;
@@ -39,7 +39,7 @@ public class FearMeter : MonoBehaviour
         _fearfulThreshold = _loseValue / 2f;
 
         _fearMeter = GetComponent<Slider>();
-        _fearMeter.value = 0;
+        //_fearMeter.value = 0;
         _fearLevel = GameObject.FindFirstObjectByType<FearIdentifier>();
 
         _shakeThreshold = _winValue * 0.9f;
@@ -80,7 +80,7 @@ public class FearMeter : MonoBehaviour
 
     private void DestroyThisSlider()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);// Destroy(gameObject);
     }
 
     private void Shake()

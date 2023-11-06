@@ -16,13 +16,13 @@ public class GhostObjects : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeRemaining;
     [SerializeField] Slider slider;
     [SerializeField] GameObject canvas;
-    Sprite standartSprite;
+    Sprite standardSprite;
     SpriteRenderer spriteRenderer;
 
     [SerializeField] GOValues goValues;
     [SerializeField] AudioSource audioSource;
 
-    int localFearValue;
+    public int localFearValue;
     bool girlfriendInRange = false;
     bool girlfriendShocked = false;
     bool objectIsHaunted = false;
@@ -30,7 +30,7 @@ public class GhostObjects : MonoBehaviour
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        standartSprite = spriteRenderer.sprite;
+        standardSprite = spriteRenderer.sprite;
         
         audioSource = GetComponent<AudioSource>();
     }
@@ -49,6 +49,22 @@ public class GhostObjects : MonoBehaviour
         else if (col.GetComponent<GirlfriendControllerEndo>()) {
             girlfriendInRange = true;
         }
+       // Debug.Log($"{ gameObject.name} was triggered by { col.gameObject.name}");
+    }
+
+    private void Update()
+    {
+        if (girlfriendInRange)
+        {
+            if (objectIsHaunted && !girlfriendShocked)
+            {
+                ChangeFearLevel(-goValues.taskAngstValue);
+                audioSource.clip = goValues.girlfriendScream;
+                audioSource.PlayOneShot(audioSource.clip);
+                girlfriendShocked = true;
+
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
@@ -56,10 +72,10 @@ public class GhostObjects : MonoBehaviour
             canvas.SetActive(false);
             StopCoroutine(Timer(0));
         }
-        else if (col.GetComponent<GirlfriendController>()) {
+        else if (col.GetComponent<GirlfriendControllerEndo>()) {
             girlfriendInRange = false;
-            girlfriendShocked = false;
         }
+       // Debug.Log($"{gameObject.name} got left by {col.gameObject.name}");
     }
 
     IEnumerator Timer(float secondsleft) {
@@ -71,11 +87,14 @@ public class GhostObjects : MonoBehaviour
                 secondsleft -= Time.deltaTime;
                 timeRemaining.text = seconds.ToString();
                 slider.value = secondsleft;
+                audioSource.clip = goValues.playerCleaning;
+                audioSource.Play();
             }
             else if (Input.GetKey(KeyCode.E) && secondsleft <= 0) TaskCompleted();
             else if (!Input.GetKey(KeyCode.E)) {
                 secondsleft = secondsleftValue;
                 timeRemaining.text = secondsleft.ToString();
+                audioSource.Stop();
             }
             yield return null;
         }
@@ -85,10 +104,10 @@ public class GhostObjects : MonoBehaviour
         ChangeFearLevel(goValues.taskAngstValue);
         objectIsHaunted = false;
         canvas.SetActive(false);
-        spriteRenderer.sprite = standartSprite;
+        spriteRenderer.sprite = standardSprite;
 
-        audioSource.clip = goValues.playerCleaning;
-        audioSource.Play();
+        //audioSource.clip = goValues.playerCleaning;
+        //audioSource.Play();
     }
     public void ChangeFearLevel(int fearChangeValue) {
         localFearValue = fearDisplay.gameObject.GetComponent<FearIdentifier>().globalFearValu;
@@ -102,7 +121,7 @@ public class GhostObjects : MonoBehaviour
         spriteRenderer.sprite = goValues.hauntedSprite;
         audioSource.clip = goValues.ghostUseSound;
         audioSource.Play();
-        StartCoroutine(WaitingForGirlfriend());
+        //StartCoroutine(WaitingForGirlfriend());
     }
 
     IEnumerator WaitingForGirlfriend() {
