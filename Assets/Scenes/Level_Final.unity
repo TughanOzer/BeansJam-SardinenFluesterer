@@ -6280,6 +6280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
+    - target: {fileID: 1038896448240625077, guid: f2aa2ee7d3acfcc419980febf4e4902c, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 7680559559716127459, guid: f2aa2ee7d3acfcc419980febf4e4902c, type: 3}
       propertyPath: m_Name
       value: FearBed
@@ -6537,7 +6541,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1589821516, guid: 7b4152c498800214a9d42663fb0ba1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -7666,7 +7670,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1589821516, guid: 7b4152c498800214a9d42663fb0ba1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12309,7 +12313,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: -522372106, guid: 7b4152c498800214a9d42663fb0ba1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -13820,7 +13824,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: -522372106, guid: 7b4152c498800214a9d42663fb0ba1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -14253,6 +14257,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
+    - target: {fileID: 1038896448240625077, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 6041049737723901143, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: m_Size.x
       value: 0.5116112
@@ -14327,6 +14335,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
+    - target: {fileID: 1038896448240625077, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 7680559559716127459, guid: f71a60779f1631247aae6d0486c94aff, type: 3}
       propertyPath: m_Name
       value: FearBad
@@ -14734,6 +14746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2070685224346353563, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6255014359143730148, guid: 20d99f3f516108f4f8e400c0ea789428, type: 3}
       propertyPath: m_SortingOrder
       value: 4
@@ -14889,7 +14905,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1589821516, guid: 7b4152c498800214a9d42663fb0ba1c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -14931,7 +14947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1326192864
 Transform:
   m_ObjectHideFlags: 0
@@ -15510,6 +15526,10 @@ PrefabInstance:
     - target: {fileID: 3486654958447358408, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
       propertyPath: m_Name
       value: LevelUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486654958447358408, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6336230106725177087, guid: ad7475587cfa02843b2dbdf2ebece6f8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17642,7 +17662,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.0010679982, g: 0.2264151, b: 0.08154912, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -17788,6 +17808,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
+    - target: {fileID: 1038896448240625077, guid: 79b7aea9f0cb2c74fac72f92cf62059b, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 7680559559716127459, guid: 79b7aea9f0cb2c74fac72f92cf62059b, type: 3}
       propertyPath: m_Name
       value: FearPflanze
@@ -18460,6 +18484,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
+    - target: {fileID: 1038896448240625077, guid: 79b7aea9f0cb2c74fac72f92cf62059b, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 7680559559716127459, guid: 79b7aea9f0cb2c74fac72f92cf62059b, type: 3}
       propertyPath: m_Name
       value: FearPflanze (2)
@@ -19272,6 +19300,10 @@ PrefabInstance:
     - target: {fileID: 3296650475705943999, guid: fbd4915fb23dff147b4d81c18dca1886, type: 3}
       propertyPath: m_Name
       value: FearAnzeige
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296650475705943999, guid: fbd4915fb23dff147b4d81c18dca1886, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3889736701008721141, guid: fbd4915fb23dff147b4d81c18dca1886, type: 3}
       propertyPath: m_IsActive
@@ -20564,11 +20596,11 @@ PrefabInstance:
       objectReference: {fileID: 312882265}
     - target: {fileID: 8239568581495059101, guid: 4c9d8fd8df4e14a4ebaeeabeeef3a792, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.993
+      value: -2.699
       objectReference: {fileID: 0}
     - target: {fileID: 8239568581495059101, guid: 4c9d8fd8df4e14a4ebaeeabeeef3a792, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.837
+      value: -2.391
       objectReference: {fileID: 0}
     - target: {fileID: 9025307093307581179, guid: 4c9d8fd8df4e14a4ebaeeabeeef3a792, type: 3}
       propertyPath: route1.Array.size

@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerController2D : MonoBehaviour
 {
-    [Header("Game Mode")]
-    [Tooltip("Check if you want to have jumping enabled, but vertical movement disabled."),
-     SerializeField] bool sideScroller;
-    public Vector2 moveDirection;
-
     [Header("Moving")]
     [Tooltip("Tip: Create and add a Physics Material to the Player's RB to prevent getting stuck."),
      SerializeField] Rigidbody2D playerRigidbody;
@@ -16,6 +11,8 @@ public class PlayerController2D : MonoBehaviour
      SerializeField] float movementSpeed;
     float horizontalMovement;
     float verticalMovement;
+    bool moving;
+    public Vector2 moveDirection;
 
     [Header("Animation + Sound")]
     [SerializeField] Animator animator;
@@ -40,7 +37,7 @@ public class PlayerController2D : MonoBehaviour
         verticalMovement = Input.GetAxis("Vertical");
         Move();
 
-        if (Input.GetKey(KeyCode.E)){ }
+        //if(moving) PlaySoundEffect(0);
     }
 
     void Move() {
@@ -48,18 +45,38 @@ public class PlayerController2D : MonoBehaviour
         moveDirection = new Vector2(horizontalMovement, verticalMovement);
         if (horizontalMovement != 0f || verticalMovement != 0f)
         {
+            moving = true;
             animator.SetBool("moving", true);
-            PlaySoundEffect(0);
+
+            
+            // requiring float parameters to trigger the transition inside the animator (controller)
+            if (Mathf.Abs(horizontalMovement) > Mathf.Abs(verticalMovement))
+            {
+                if (horizontalMovement < 0.0f)
+                    animator.SetFloat("Move x", -1);
+                if (horizontalMovement > 0.0f)
+                    animator.SetFloat("Move x", +1);
+                animator.SetFloat("Move y", 0);
+            }
+            else
+            {
+                if (verticalMovement < 0.0f)
+                    animator.SetFloat("Move y", -1);
+                if (verticalMovement > 0.0f)
+                    animator.SetFloat("Move y", +1);
+                animator.SetFloat("Move x", 0);
+            }
+
         }
         else
+        {
             animator.SetBool("moving", false);
+            moving = false;
+            animator.SetFloat("Move y", 0);
+            animator.SetFloat("Move x", 0);
+        }
 
-        // requiring float parameters to trigger the transition inside the animator (controller)
-        animator.SetFloat("Move x", horizontalMovement);
-
-        if(!sideScroller)
-            animator.SetFloat("Move y", verticalMovement);
-
+        
     }
 
     void PlaySoundEffect(int x) {
