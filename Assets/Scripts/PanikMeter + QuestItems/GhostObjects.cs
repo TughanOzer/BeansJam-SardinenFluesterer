@@ -68,8 +68,9 @@ public class GhostObjects : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.GetComponent<PlayerController2D>()) {
+        if (col.GetComponent<PlayerController2D>() && objectIsHaunted) {
             canvas.SetActive(false);
+            slider.value = goValues.taskTime;
             StopCoroutine(Timer(0));
         }
         else if (col.GetComponent<GirlfriendControllerEndo>()) {
@@ -85,7 +86,7 @@ public class GhostObjects : MonoBehaviour
             if (Input.GetKey(KeyCode.E) && secondsleft > 0) {
                 float seconds = Mathf.FloorToInt(secondsleft);
                 secondsleft -= Time.deltaTime;
-                timeRemaining.text = seconds.ToString();
+                timeRemaining.text = (seconds +1).ToString();
                 slider.value = secondsleft;
                 audioSource.clip = goValues.playerCleaning;
                 audioSource.Play();
@@ -93,7 +94,7 @@ public class GhostObjects : MonoBehaviour
             else if (Input.GetKey(KeyCode.E) && secondsleft <= 0) TaskCompleted();
             else if (!Input.GetKey(KeyCode.E)) {
                 secondsleft = secondsleftValue;
-                timeRemaining.text = secondsleft.ToString();
+                timeRemaining.text = (secondsleft +1).ToString();
                 audioSource.Stop();
             }
             yield return null;

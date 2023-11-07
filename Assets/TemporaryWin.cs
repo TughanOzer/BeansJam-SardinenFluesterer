@@ -20,6 +20,16 @@ public class TemporaryWin : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.GetComponent<PlayerController2D>())
+        {
+            canvas.SetActive(false);
+            slider.value = 3;
+            StopCoroutine(Timer(0));
+        }
+    }
+
     IEnumerator Timer(float secondsleft) {
         float secondsleftValue = secondsleft;
         slider.maxValue = secondsleftValue;

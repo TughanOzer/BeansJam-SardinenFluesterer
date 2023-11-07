@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class DeathTrap : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class DeathTrap : MonoBehaviour
 
     [SerializeField] private Image _timerImage;
     [SerializeField] private List<Sprite> _timerSprites = new();
+    [SerializeField] GameObject playerPrompt;
+    [SerializeField] Slider unarmingTimeUI;
+    [SerializeField] TextMeshProUGUI timeRemaining;
     private float _disarmingIncrements;
     private float _armingIncrements;
     private int _currentSpriteIndex = 0;
@@ -67,13 +72,24 @@ public class DeathTrap : MonoBehaviour
         if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed)
         {
             playerInRange = true;
+            playerPrompt.SetActive(true);
             _timer = _disarmingTime;
+            unarmingTimeUI.maxValue = _timer;
         }
 
         if (collision.CompareTag("Girlfriend") && _isArmed)
         {
             TriggerTrap();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed) {
+
+            playerPrompt.SetActive(false);
+            playerInRange = false;
+        } 
     }
 
     private void Update()
@@ -90,9 +106,9 @@ public class DeathTrap : MonoBehaviour
             {
                 _isBeingDisarmed = true;
                 _timer -= Time.deltaTime;
-                //if(_timer == 0) _isBeingDisarmed = true;
 
-                Debug.Log("Player disarming " + _timer);
+                unarmingTimeUI.value = _timer;
+                timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
             }
         
         }
@@ -108,25 +124,27 @@ public class DeathTrap : MonoBehaviour
                     SetTimerSprite(_currentSpriteIndex);
                 }
             }
-            else
-            {
-                var currentIncrement = _disarmingIncrements * (_currentSpriteIndex + 1);
-                if (_timer < (_disarmingTime - currentIncrement))
-                {
-                    _currentSpriteIndex++;
-                    SetTimerSprite(_currentSpriteIndex);
-                }
-            }
+            //else
+            //{
+            //    var currentIncrement = _disarmingIncrements * (_currentSpriteIndex + 1);
+            //    if (_timer < (_disarmingTime - currentIncrement))
+            //    {
+            //        _currentSpriteIndex++;
+            //        SetTimerSprite(_currentSpriteIndex);
+            //    }
+            //}
         }
 
 
-        if (_timer <= 0)
+        if (_timer < 0)
         {
             if (_isBeingDisarmed)
             {
+                playerPrompt.SetActive(false);
                 _isBeingDisarmed = false;
                 _isBeingArmed = false;
                 _isArmed = false;
+
                 //sound.PlayOneShot(removed);
                 InteractionFinished();
             }
