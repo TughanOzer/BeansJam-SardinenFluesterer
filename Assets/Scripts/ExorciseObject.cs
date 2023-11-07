@@ -15,7 +15,8 @@ public class ExorciseObject : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeRemaining;
     public static int remainingObjects = 0;
     bool playerInRange = false;
-    float unarmingTime;
+    float unarmingTime = 3;
+    float timer;
 
     private void Start()
     {
@@ -47,10 +48,14 @@ public class ExorciseObject : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                unarmingTime = unarmingTime - Time.deltaTime;
-                slider.value = unarmingTime;
-                timeRemaining.text = unarmingTime.ToString();
-                if ((int)unarmingTime == 0)
+                if (timer == unarmingTime)
+                {
+                    slider.maxValue = unarmingTime;
+                }
+                timer -= Time.deltaTime;
+                slider.value = timer;
+                timeRemaining.text = ((int)timer+1).ToString();
+                if (timer < 0)
                    ObjectExorcised();
             }
             else
@@ -60,8 +65,8 @@ public class ExorciseObject : MonoBehaviour
  
     void ResetExorcism()
     {
-        unarmingTime = 3;
-        slider.value = 3;
+        timer = unarmingTime;
+        slider.value = unarmingTime;
         timeRemaining.text = unarmingTime.ToString();
     }
 

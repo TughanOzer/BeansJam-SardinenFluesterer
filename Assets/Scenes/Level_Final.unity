@@ -13571,6 +13571,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2902247, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &971976896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2970653313678525138, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
+  m_PrefabInstance: {fileID: 1528690185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &973718177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3733937532320143532, guid: cf12ba7e5c028394f9c350409fcc8ba2, type: 3}
@@ -15174,20 +15185,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 1326192864}
     m_Modifications:
     - target: {fileID: 1038896448240625077, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038896448240625077, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: MinDistance
+      value: 0.6871655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038896448240625077, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -750894904996388372, guid: 2ee993e63683bd04e903fa6673856abd, type: 2}
     - target: {fileID: 1060483764263604924, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: m_Radius
-      value: 0.79
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1060483764263604924, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: m_Offset.y
-      value: -0.1
+      value: -0.27
       objectReference: {fileID: 0}
     - target: {fileID: 6041049737723901143, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: m_Size.x
       value: 0.5116112
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041049737723901143, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6041049737723901143, guid: f84aed82d41edf74d9678a0728ea95f4, type: 3}
       propertyPath: m_Offset.x
@@ -17964,6 +17987,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &1525412038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2970653313678525138, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
+  m_PrefabInstance: {fileID: 4127716038081271400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1528690185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17980,6 +18014,10 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 419783477}
+    - target: {fileID: 6631510756614308358, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
+      propertyPath: timeRemaining
+      value: 
+      objectReference: {fileID: 971976896}
     - target: {fileID: 6631510756614308358, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
       propertyPath: winLoseHandler
       value: 
@@ -21601,6 +21639,10 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 353379379}
+    - target: {fileID: 6631510756614308358, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
+      propertyPath: timeRemaining
+      value: 
+      objectReference: {fileID: 1525412038}
     - target: {fileID: 6631510756614308358, guid: 22ea6fd82b7bda742be238f0fa3daa36, type: 3}
       propertyPath: winLoseHandler
       value: 

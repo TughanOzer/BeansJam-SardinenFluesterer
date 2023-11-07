@@ -59,6 +59,7 @@ public class WinLoseHandler : MonoBehaviour
     public void FadeInWinImage()
     {
         _winBanner.DOFade(1, 3f).OnComplete(EndStateReached);
+        message.SetActive(true);
     }
 
     private void EndStateReached()

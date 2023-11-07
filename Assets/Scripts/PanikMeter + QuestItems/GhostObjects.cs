@@ -100,6 +100,8 @@ public class GhostObjects : MonoBehaviour
             girlfriendInRange = false;
             girlfriendShocked = false;
         }
+        if(col.GetComponent<PlayerController2D>())
+            playerInRange = false;
     }
 
     //IEnumerator Timer(float secondsleft) {
