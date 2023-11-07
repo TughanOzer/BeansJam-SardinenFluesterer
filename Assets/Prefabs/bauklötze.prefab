@@ -96,7 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8020013387918186096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936d2dcbbfab33d4f9c3bdadb6b7640c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f2c5b4b920f6ea4dbd1ade474dc2d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   winLoseHandler: {fileID: 0}
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836636534939523020, guid: 309d0ac191919e7479443cdeabcc83be, type: 3}
       propertyPath: m_Name
-      value: FearObjectUI
+      value: InteractionPromptUI
       objectReference: {fileID: 0}
     - target: {fileID: 7836636534939523020, guid: 309d0ac191919e7479443cdeabcc83be, type: 3}
       propertyPath: m_IsActive

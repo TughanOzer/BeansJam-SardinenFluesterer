@@ -13,6 +13,7 @@ public class GhostObjects : MonoBehaviour
     public event EventHandler OnGhostInteraction;
 
     TextMeshProUGUI fearDisplay;
+    float timer;
     [SerializeField] TextMeshProUGUI timeRemaining;
     [SerializeField] Slider slider;
     [SerializeField] GameObject canvas;
@@ -26,19 +27,21 @@ public class GhostObjects : MonoBehaviour
     bool girlfriendInRange = false;
     bool girlfriendShocked = false;
     bool objectIsHaunted = false;
+    bool playerInRange = false;
 
     private void Start() {
         fearDisplay = FindObjectOfType<FearIdentifier>().gameObject.GetComponent<TextMeshProUGUI>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         standardSprite = spriteRenderer.sprite;
-        
+        slider.maxValue = goValues.taskTime;
         audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.GetComponent<PlayerController2D>() && objectIsHaunted) {
-            canvas.SetActive(true);
-            StartCoroutine(Timer(goValues.taskTime));
+        if (col.GetComponent<PlayerController2D>()) {
+            playerInRange = true;
+
+            //StartCoroutine(Timer(goValues.taskTime));
         }
         else if (col.TryGetComponent(out Ghost ghost) && !objectIsHaunted) {
             //Temporäre Notlösung
@@ -49,59 +52,77 @@ public class GhostObjects : MonoBehaviour
         else if (col.GetComponent<GirlfriendControllerEndo>()) {
             girlfriendInRange = true;
         }
-       // Debug.Log($"{ gameObject.name} was triggered by { col.gameObject.name}");
     }
-
+  
     private void Update()
     {
-        if (girlfriendInRange)
+        if (objectIsHaunted)
         {
-            if (objectIsHaunted && !girlfriendShocked)
+            if (girlfriendInRange && !girlfriendShocked)
             {
                 ChangeFearLevel(-goValues.taskAngstValue);
-                audioSource.clip = goValues.girlfriendScream;
-                audioSource.PlayOneShot(audioSource.clip);
+                audioSource.PlayOneShot(goValues.girlfriendScream);
                 girlfriendShocked = true;
-
             }
+
+            if (playerInRange)
+            {
+                canvas.SetActive(true);
+                
+                if (Input.GetKey(KeyCode.E))
+                {   
+                    if (timer == goValues.taskTime)
+                    {
+                        slider.maxValue = timer;
+                        audioSource.PlayOneShot(goValues.playerCleaning);
+                    }
+                    timer -= Time.deltaTime;
+                    timeRemaining.text = ((int)timer + 1).ToString();
+                    slider.value = timer;
+                    if (timer < 0)
+                        TaskCompleted();
+                }
+                else
+                    ResetCleaning();
+            }else canvas.SetActive(false);
         }
+    }
+    void ResetCleaning()
+    {
+        timer = goValues.taskTime;
+        slider.value = timer;
+        timeRemaining.text = ((int)timer+1).ToString();
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.GetComponent<PlayerController2D>() && objectIsHaunted) {
-            canvas.SetActive(false);
-            slider.value = goValues.taskTime;
-            StopCoroutine(Timer(0));
-        }
-        else if (col.GetComponent<GirlfriendControllerEndo>())
+        if (col.GetComponent<GirlfriendControllerEndo>())
         {
             girlfriendInRange = false;
             girlfriendShocked = false;
         }
-        // Debug.Log($"{gameObject.name} got left by {col.gameObject.name}");
     }
 
-    IEnumerator Timer(float secondsleft) {
-        float secondsleftValue = secondsleft;
-        slider.maxValue = secondsleftValue;
-        while (secondsleft >= -1 && objectIsHaunted) {
-            if (Input.GetKey(KeyCode.E) && secondsleft > 0) {
-                float seconds = Mathf.FloorToInt(secondsleft);
-                secondsleft -= Time.deltaTime;
-                timeRemaining.text = (seconds +1).ToString();
-                slider.value = secondsleft;
-                audioSource.clip = goValues.playerCleaning;
-                audioSource.Play();
-            }
-            else if (Input.GetKey(KeyCode.E) && secondsleft <= 0) TaskCompleted();
-            else if (!Input.GetKey(KeyCode.E)) {
-                secondsleft = secondsleftValue;
-                timeRemaining.text = (secondsleft +1).ToString();
-                audioSource.Stop();
-            }
-            yield return null;
-        }
-    }
+    //IEnumerator Timer(float secondsleft) {
+    //    float secondsleftValue = secondsleft;
+    //    slider.maxValue = secondsleftValue;
+    //    while (secondsleft >= -1 && objectIsHaunted) {
+    //        if (Input.GetKey(KeyCode.E) && secondsleft > 0) {
+    //            float seconds = Mathf.FloorToInt(secondsleft);
+    //            secondsleft -= Time.deltaTime;
+    //            timeRemaining.text = (seconds +1).ToString();
+    //            slider.value = secondsleft;
+    //            audioSource.clip = goValues.playerCleaning;
+    //            audioSource.Play();
+    //        }
+    //        else if (Input.GetKey(KeyCode.E) && secondsleft <= 0) TaskCompleted();
+    //        else if (!Input.GetKey(KeyCode.E)) {
+    //            secondsleft = secondsleftValue;
+    //            timeRemaining.text = (secondsleft +1).ToString();
+    //            audioSource.Stop();
+    //        }
+    //        yield return null;
+    //    }
+    //}
 
     void TaskCompleted() {
         ChangeFearLevel(goValues.taskAngstValue);
@@ -120,29 +141,29 @@ public class GhostObjects : MonoBehaviour
     }
 
     public void GhostInteraction() {
-        objectIsHaunted = true;
         spriteRenderer.sprite = goValues.hauntedSprite;
         audioSource.clip = goValues.ghostUseSound;
         audioSource.Play();
+        objectIsHaunted = true;
         //StartCoroutine(WaitingForGirlfriend());
     }
 
-    IEnumerator WaitingForGirlfriend() {
-        if (objectIsHaunted) {
-            while (objectIsHaunted) {
-                if (girlfriendInRange && !girlfriendShocked) {
-                    ChangeFearLevel(goValues.taskAngstValue);
-                    audioSource.clip = goValues.girlfriendScream;
-                    audioSource.Play();
+    //IEnumerator WaitingForGirlfriend() {
+    //    if (objectIsHaunted) {
+    //        while (objectIsHaunted) {
+    //            if (girlfriendInRange && !girlfriendShocked) {
+    //                ChangeFearLevel(goValues.taskAngstValue);
+    //                audioSource.clip = goValues.girlfriendScream;
+    //                audioSource.Play();
 
-                    //objectIsHaunted = false;
-                    //spriteRenderer.sprite = standartSprite;
-                    girlfriendShocked = true;
-                    yield return null;
-                } 
-                else yield return null;
-            }
-        }
-    }
+    //                //objectIsHaunted = false;
+    //                //spriteRenderer.sprite = standartSprite;
+    //                girlfriendShocked = true;
+    //                yield return null;
+    //            } 
+    //            else yield return null;
+    //        }
+    //    }
+    //}
 
 }

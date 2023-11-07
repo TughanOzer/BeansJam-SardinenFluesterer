@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 8141954601474451255}
   - component: {fileID: 2320318563612145603}
   m_Layer: 5
-  m_Name: FearObjectUI
+  m_Name: InteractionPromptUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

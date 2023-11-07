@@ -30,7 +30,7 @@ public class ObjectsFoundVisuals : MonoBehaviour
         Ghost.OnExorcism -= FadeImage;
     }
 
-    private void FadeImage(int _)
+    public void FadeImage(int _)
     {
         if (GhostImages.Count > 0)
         {

@@ -68,7 +68,7 @@ public class DeathTrap : MonoBehaviour
         if (collision.TryGetComponent(out Ghost ghost) && !_isArmed && !_isBeingArmed && !_isBeingDisarmed && !waitBetween)
         {
             _isBeingArmed = true;
-
+            
             sound.PlayOneShot(arming);
             ghost.SetWaitTime(_armingTime);
             _timer = _armingTime;
@@ -99,21 +99,37 @@ public class DeathTrap : MonoBehaviour
 
     private void Update()
     {
-        if (_timer != 0) { 
+        if (_timer != 0) {
             //if (_isBeingArmed) {
             //    //_timerImage.DOFade(1, 0.1f);
             //    _timer -= Time.deltaTime;
             //}
-        
-            if (playerInRange && Input.GetKey(KeyCode.E))
-            {
-                _isBeingDisarmed = true;
 
-                unarmingTimeUI.value = _timer;
-                timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
+            if (playerInRange && _isArmed)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    _isBeingDisarmed = true;
+                    _timer -= Time.deltaTime;
+                    unarmingTimeUI.value = _timer;
+                    timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
+
+                }
+                else
+                {
+                    _isBeingDisarmed = false;
+                    unarmingTimeUI.value = _disarmingTime;
+                    timeRemaining.text = _disarmingTime.ToString();
+                    _timer = _disarmingTime;
+                }
+
+            }
+            else {
+
+                _timer -= Time.deltaTime;
             }
         
-                _timer -= Time.deltaTime;
+                
         }
         
 

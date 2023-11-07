@@ -129,12 +129,15 @@ public class Ghost : MonoBehaviour
         _nextInteractionObject = _possibleInteractions[randomInteractionIndex];
     }
 
-    private void Exorcise(int objectIndex)
+    public void Exorcise(int objectIndex)
     {
         if (objectIndex == _objectIndex)
         {
-            //Leave screen and disappear
+            _visualRenderer.DOFade(1, 3f).OnComplete(Disappear);
         }
+    }
+    void Disappear() {
+        Destroy(gameObject);
     }
 
     private bool CheckForEctoplasmDrop()
