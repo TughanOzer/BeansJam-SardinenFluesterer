@@ -73,10 +73,12 @@ public class GhostObjects : MonoBehaviour
             slider.value = goValues.taskTime;
             StopCoroutine(Timer(0));
         }
-        else if (col.GetComponent<GirlfriendControllerEndo>()) {
+        else if (col.GetComponent<GirlfriendControllerEndo>())
+        {
             girlfriendInRange = false;
+            girlfriendShocked = false;
         }
-       // Debug.Log($"{gameObject.name} got left by {col.gameObject.name}");
+        // Debug.Log($"{gameObject.name} got left by {col.gameObject.name}");
     }
 
     IEnumerator Timer(float secondsleft) {
@@ -129,7 +131,7 @@ public class GhostObjects : MonoBehaviour
         if (objectIsHaunted) {
             while (objectIsHaunted) {
                 if (girlfriendInRange && !girlfriendShocked) {
-                    ChangeFearLevel(-goValues.taskAngstValue);
+                    ChangeFearLevel(goValues.taskAngstValue);
                     audioSource.clip = goValues.girlfriendScream;
                     audioSource.Play();
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WinLoseHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WinLoseHandler : MonoBehaviour
 
     [SerializeField] private Image _winBanner;
     [SerializeField] private Image _loseBanner;
+    [SerializeField] GameObject message;
 
     private bool _endStateReached;
 
@@ -21,19 +23,18 @@ public class WinLoseHandler : MonoBehaviour
     {
         _winBanner.DOFade(0, 0.1f);
         _loseBanner.DOFade(0, 0.1f);
+        message.SetActive(false);
     }
 
     private void OnEnable()
     {
         DeathTrap.OnDeathTrapTriggered += FadeInLoseImage;
-        FearMeter.OnHappinessMax += FadeInWinImage;
         FearMeter.OnFearMax += FadeInLoseImage;
     }
 
     private void OnDisable()
     {
         DeathTrap.OnDeathTrapTriggered -= FadeInLoseImage;
-        FearMeter.OnHappinessMax -= FadeInWinImage;
         FearMeter.OnFearMax -= FadeInLoseImage;
     }
 
@@ -45,10 +46,13 @@ public class WinLoseHandler : MonoBehaviour
             LoadHelper.LoadSceneWithLoadingScreen(SceneName.MainMenu);
         }
     }
-
+    public void SetMessage(string s) {
+        message.GetComponent<TMP_Text>().text =  s;
+    }
     private void FadeInLoseImage()
     {
         _loseBanner.DOFade(1, 3f).OnComplete(EndStateReached);
+        message.SetActive(true);
     }
 
     //auf public gesetzt

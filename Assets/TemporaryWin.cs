@@ -50,6 +50,7 @@ public class TemporaryWin : MonoBehaviour
     void Win() {
         //fearmeter.GetComponent<FearMeter>.().OnHappinessMax?.Invoke();
         winLoseHandler.FadeInWinImage();
+        winLoseHandler.SetMessage("You exorcised the poltergeist kids!");
     }
 
 }

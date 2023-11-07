@@ -13,20 +13,17 @@ public class FearMeter : MonoBehaviour
     private FearIdentifier _fearLevel;
 
     [SerializeField] private Image _sliderHandle;
-    [SerializeField] private Sprite _midSprite;
-    [SerializeField] private Sprite _fearfulSprite;
+    [SerializeField] private Sprite _veryHappySprite;
     [SerializeField] private Sprite _happySprite;
+    [SerializeField] private Sprite _unhappySprite;
+    [SerializeField] private Sprite _fearfulSprite;
 
-    [SerializeField] public int _winValue;
-    [SerializeField, Tooltip("Must be negative.")] public int _loseValue;
-
-    private float _happyThreshold;
-    private float _fearfulThreshold;
+    public int _loseValue;
+    int sliderThreshold;
 
     private float _shakeThreshold;
     private bool _isShaking;
 
-    public static event Action OnHappinessMax;
     public static event Action OnFearMax;
 
     #endregion
@@ -35,52 +32,54 @@ public class FearMeter : MonoBehaviour
 
     private void Awake()
     {
-        _happyThreshold = _winValue / 2f;
-        _fearfulThreshold = _loseValue / 2f;
 
         _fearMeter = GetComponent<Slider>();
-        //_fearMeter.value = 0;
+        _fearMeter.value = 0;
         _fearLevel = GameObject.FindFirstObjectByType<FearIdentifier>();
 
-        _shakeThreshold = _winValue * 0.9f;
+        _shakeThreshold = _loseValue * 0.9f;
+        sliderThreshold = _loseValue / 4;
     }
 
     private void OnEnable()
     {
         FearMeter.OnFearMax += DestroyThisSlider;
-        FearMeter.OnHappinessMax += DestroyThisSlider;
     }
 
     private void OnDisable()
     {
         FearMeter.OnFearMax -= DestroyThisSlider;
-        FearMeter.OnHappinessMax -= DestroyThisSlider;
     }
 
     private void Update()
     {
         //Temporär wieder entkommentiert
         _fearMeter.value = -_fearLevel.globalFearValu;
-        //
-        if (_fearMeter.value >= _winValue)
-            OnHappinessMax?.Invoke();
-        else if (_fearMeter.value >= _happyThreshold)
-            _sliderHandle.sprite = _fearfulSprite;
-        else if (_fearMeter.value <= _loseValue)
+
+        if (_fearMeter.value >= _loseValue)
             OnFearMax?.Invoke();
-        else if (_fearMeter.value <= _fearfulThreshold)
+        
+        if (_fearMeter.value <= sliderThreshold)
+            _sliderHandle.sprite = _veryHappySprite;
+        else if (_fearMeter.value <= sliderThreshold*2)
             _sliderHandle.sprite = _happySprite;
+        else if (_fearMeter.value <= sliderThreshold*3)
+            _sliderHandle.sprite = _unhappySprite;
         else
-            _sliderHandle.sprite = _midSprite;
+            _sliderHandle.sprite = _fearfulSprite;
 
         if (Mathf.Abs(_fearMeter.value) > _shakeThreshold && !_isShaking)
             Shake();
-
+        
     }
 
     private void DestroyThisSlider()
     {
-        gameObject.SetActive(false);// Destroy(gameObject);
+        if(_fearMeter.value >= _loseValue)
+        {
+            GameObject.FindObjectOfType<WinLoseHandler>().SetMessage("Your girlfriend ran away in fear!");
+        }
+        Destroy(gameObject);
     }
 
     private void Shake()

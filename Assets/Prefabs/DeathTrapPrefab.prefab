@@ -114,6 +114,10 @@ MonoBehaviour:
   - {fileID: -1934027956, guid: fd0299a7cbde7324d9f9e71b699f7e55, type: 3}
   - {fileID: 890523588, guid: fd0299a7cbde7324d9f9e71b699f7e55, type: 3}
   - {fileID: 1869372914, guid: fd0299a7cbde7324d9f9e71b699f7e55, type: 3}
+  playerPrompt: {fileID: 0}
+  unarmingTimeUI: {fileID: 0}
+  timeRemaining: {fileID: 0}
+  timerAnimator: {fileID: 4403861694108594989}
 --- !u!58 &19237235117673998
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -358,6 +362,7 @@ GameObject:
   - component: {fileID: 3617153943754394420}
   - component: {fileID: 4549630139831576405}
   - component: {fileID: 6647187288796302750}
+  - component: {fileID: 4403861694108594989}
   m_Layer: 5
   m_Name: DestructionTimer
   m_TagString: Untagged
@@ -405,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.9023998, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.9023998, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -422,3 +427,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &4403861694108594989
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089669740962925159}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de68290f141a52e48b903f1d8238bd40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

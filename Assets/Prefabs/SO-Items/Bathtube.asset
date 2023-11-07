@@ -17,4 +17,4 @@ MonoBehaviour:
   hauntedSprite: {fileID: 21300000, guid: 9655444caab15784db3ba5c1f9016e4c, type: 3}
   playerCleaning: {fileID: 8300000, guid: bb2b37d7b1f708547a485fb35cdb966d, type: 3}
   ghostUseSound: {fileID: 8300000, guid: f9866ae6b0155f74585e11dfe9729f69, type: 3}
-  girlfriendScream: {fileID: 8300000, guid: a5021363c9acecc41ac1a5025a2aad54, type: 3}
+  girlfriendScream: {fileID: 8300000, guid: d417127bcb080024099dac0eba6a6dbd, type: 3}

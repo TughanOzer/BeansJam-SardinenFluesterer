@@ -22,6 +22,7 @@ public class DeathTrap : MonoBehaviour
     [SerializeField] private bool _isCleaver;
 
     private float _timer;
+    bool waitBetween = false;
 
     [SerializeField] private Image _timerImage;
     [SerializeField] private List<Sprite> _timerSprites = new();
@@ -30,12 +31,16 @@ public class DeathTrap : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeRemaining;
     private float _disarmingIncrements;
     private float _armingIncrements;
-    private int _currentSpriteIndex = 0;
+   // private int _currentSpriteIndex = 0;
+
+    [SerializeField] Animator timerAnimator;
+    SpriteRenderer myRenderer;
 
     private bool _isBeingArmed;
     private bool _isBeingDisarmed;
     private bool _isArmed;
     bool playerInRange = false;
+    
 
     #endregion
 
@@ -50,8 +55,8 @@ public class DeathTrap : MonoBehaviour
     private void Start()
     {
         sound = GetComponent<AudioSource>(); 
-        var renderer = GetComponent<SpriteRenderer>();
-        renderer.DOFade(0, 0.01f);
+        myRenderer = GetComponent<SpriteRenderer>();
+        myRenderer.DOFade(0, 0.01f);
         _timerImage.DOFade(0, 0.01f);
 
         _disarmingIncrements = _disarmingTime / 6;
@@ -60,7 +65,7 @@ public class DeathTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Ghost ghost) && !_isArmed && !_isBeingArmed && !_isBeingDisarmed)
+        if (collision.TryGetComponent(out Ghost ghost) && !_isArmed && !_isBeingArmed && !_isBeingDisarmed && !waitBetween)
         {
             _isBeingArmed = true;
 
@@ -95,35 +100,36 @@ public class DeathTrap : MonoBehaviour
     private void Update()
     {
         if (_timer != 0) { 
-
-            
-            if (_isBeingArmed) {
-                _timerImage.DOFade(1, 0.1f);
-                _timer -= Time.deltaTime;
-            }
+            //if (_isBeingArmed) {
+            //    //_timerImage.DOFade(1, 0.1f);
+            //    _timer -= Time.deltaTime;
+            //}
         
             if (playerInRange && Input.GetKey(KeyCode.E))
             {
                 _isBeingDisarmed = true;
-                _timer -= Time.deltaTime;
 
                 unarmingTimeUI.value = _timer;
                 timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
             }
         
+                _timer -= Time.deltaTime;
         }
+        
 
         if (_timer > 0)
         {
             if (_isBeingArmed)
             {
-                var currentIncrement = _armingIncrements * (_currentSpriteIndex + 1);
-                if (_timer < (_armingTime - currentIncrement))
-                {
-                    _currentSpriteIndex++;
-                    SetTimerSprite(_currentSpriteIndex);
-                }
+                timerAnimator.SetBool("arming", true);
+                //var currentIncrement = _armingIncrements * (_currentSpriteIndex + 1);
+                //if (_timer < (_armingTime - currentIncrement))
+                //{
+                //    _currentSpriteIndex++;
+                //    SetTimerSprite(_currentSpriteIndex);
+                //}
             }
+
             //else
             //{
             //    var currentIncrement = _disarmingIncrements * (_currentSpriteIndex + 1);
@@ -145,7 +151,6 @@ public class DeathTrap : MonoBehaviour
                 _isBeingArmed = false;
                 _isArmed = false;
 
-                //sound.PlayOneShot(removed);
                 InteractionFinished();
             }
             else if (_isBeingArmed)
@@ -155,6 +160,8 @@ public class DeathTrap : MonoBehaviour
                 _isArmed = true;
                 InteractionFinished();
             }
+            else if (waitBetween)
+                waitBetween = false;
         }
     }
 
@@ -170,36 +177,39 @@ public class DeathTrap : MonoBehaviour
     {
         sound.pitch = .5f;
         sound.PlayOneShot(triggered);
+        GameObject.FindObjectOfType<WinLoseHandler>().SetMessage("Your girlfrend walked into a trap.");
         OnDeathTrapTriggered?.Invoke();
     }
 
-    private void SetTimerSprite(int index)
-    {
-        if (index < _timerSprites.Count)
-            _timerImage.sprite = _timerSprites[index];
-    }
+    //private void SetTimerSprite(int index)
+    //{
+    //    if (index < _timerSprites.Count)
+    //        _timerImage.sprite = _timerSprites[index];
+    //}
 
     private void InteractionFinished()
     {
-        _timerImage.transform.DOShakeRotation(1f, 20);
-        _timerImage.DOFade(0, 1f).OnComplete(ResetTimerImage);
-
-        var renderer = GetComponent<SpriteRenderer>();
+        //_timerImage.transform.DOShakeRotation(1f, 20);
+       // _timerImage.DOFade(0, 1f).OnComplete(ResetTimerImage);
 
         if (_isArmed)
         {
-            renderer.DOFade(1, 1f);
+            myRenderer.DOFade(1, 1f);
+            timerAnimator.SetBool("arming", false);
         }
         else
         {
-            renderer.DOFade(0, 1f);
+            myRenderer.DOFade(0, 1f);
+            sound.PlayOneShot(removed);
+            waitBetween = true;
+            _timer = 10;
         }
     }
 
-    private void ResetTimerImage()
-    {
-        _timerImage.sprite = _timerSprites[0];
-    }
+    //private void ResetTimerImage()
+    //{
+    //    _timerImage.sprite = _timerSprites[0];
+    //}
 
     #endregion
 
