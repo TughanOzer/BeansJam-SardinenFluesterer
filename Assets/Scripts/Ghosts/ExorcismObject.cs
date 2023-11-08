@@ -90,7 +90,7 @@ public class ExorcismObject : MonoBehaviour
 
     private void ObjectExorcised()
     {
-        Ghost.RaiseExorcism(_exorcismIndex);
+        //Ghost.RaiseExorcism(_exorcismIndex);
         _isExcorcised = true;
         var renderer = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         _timerImage.transform.DOShakeRotation(1f, 20);

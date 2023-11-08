@@ -13,10 +13,13 @@ public class GhostManager : MonoBehaviour
     [SerializeField] private List<Ghost> _ghostPrefabs;
     [SerializeField] private float _startSpawnDelay = 10;
     [SerializeField] private float _delayReductionStep = 0.1f;
-    [SerializeField] private float _minimumDelay = 3f;
+    [SerializeField] float _minimumDelay;
+    [SerializeField] float _maximumDelay;
 
     private float _spawnTimer;
     private float _currentSpawnDelay;
+
+    public int ghostsInGame;
 
     #endregion
 
@@ -33,7 +36,7 @@ public class GhostManager : MonoBehaviour
     private void Start()
     {
         _spawnTimer = _startSpawnDelay;
-        _currentSpawnDelay = _startSpawnDelay;
+        _currentSpawnDelay = _maximumDelay;
     }
 
     private void Update()
@@ -43,7 +46,12 @@ public class GhostManager : MonoBehaviour
         if (_spawnTimer <= 0)
             SpawnGhost();
     }
-
+    void CountGhosts() {
+        ghostsInGame = 0;
+        
+        foreach (var ghost in FindObjectsOfType<Ghost>())
+            ghostsInGame++;
+    }
     private void SpawnGhost()
     {
         var ghostSpawnCount = _ghostObjectUI.GhostImages.Count;
@@ -55,10 +63,10 @@ public class GhostManager : MonoBehaviour
 
         _spawnTimer = _currentSpawnDelay;
      
-        int ghostIndex = UnityEngine.Random.Range(0, ghostSpawnCount);
+        int ghostIndex = UnityEngine.Random.Range(1, ghostSpawnCount+1);
 
-        float xSpawnPosition = UnityEngine.Random.Range(10, 50);
-        float ySpawnPosition = UnityEngine.Random.Range(5, 25);
+        float xSpawnPosition = UnityEngine.Random.Range(10, 25);
+        float ySpawnPosition = UnityEngine.Random.Range(10, 25);
 
         float xInverted = UnityEngine.Random.Range(0, 1f);
         float yInverted = UnityEngine.Random.Range(0, 1f);
@@ -68,6 +76,8 @@ public class GhostManager : MonoBehaviour
 
         var ghost = Instantiate(_ghostPrefabs[0], new Vector2(xSpawnPosition, ySpawnPosition), Quaternion.identity);
         ghost.SetUp(ghostIndex);
+        CountGhosts();
+        Debug.Log(ghostIndex);
     }
 
     #endregion

@@ -89,8 +89,12 @@ public class ExorciseObject : MonoBehaviour
 
     void ObjectExorcised() {
         GameObject.FindObjectOfType<ObjectsFoundVisuals>().FadeImage(remainingObjects);
-        if(TryGetComponent(out Ghost ghost)) 
-            ghost.Exorcise(remainingObjects);
+        if (FindObjectOfType<GhostManager>().ghostsInGame != 0)
+        {
+            foreach(var ghost in FindObjectsOfType<Ghost>()) 
+                ghost.Exorcise(remainingObjects);
+        }
+            
         remainingObjects--;
         if (remainingObjects == 0) {
             winLoseHandler.FadeInWinImage();

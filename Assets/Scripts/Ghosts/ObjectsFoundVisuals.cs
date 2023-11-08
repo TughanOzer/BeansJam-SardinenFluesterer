@@ -20,15 +20,15 @@ public class ObjectsFoundVisuals : MonoBehaviour
         GhostImages = GetComponentsInChildren<Image>().ToList();
     }
 
-    private void OnEnable()
-    {
-        Ghost.OnExorcism += FadeImage;
-    }
+    //private void OnEnable()
+    //{
+    //    Ghost.OnExorcism += FadeImage;
+    //}
 
-    private void OnDisable()
-    {
-        Ghost.OnExorcism -= FadeImage;
-    }
+    //private void OnDisable()
+    //{
+    //    Ghost.OnExorcism -= FadeImage;
+    //}
 
     public void FadeImage(int _)
     {

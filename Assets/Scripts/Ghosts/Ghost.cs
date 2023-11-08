@@ -27,6 +27,8 @@ public class Ghost : MonoBehaviour
     private Transform _visuals;
     private SpriteRenderer _visualRenderer;
     private float _waitTime = 0;
+    float timeBetween;
+    bool delay = true;
 
     const string INTERACTABLE_OBJECT_TAG = "InteractableObject";
     const string PATHLOGIC_TILE_TAG = "PathLogicTile";
@@ -35,15 +37,15 @@ public class Ghost : MonoBehaviour
 
     #region Methods
 
-    private void OnEnable()
-    {
-        OnExorcism += Exorcise;
-    }
+    //private void OnEnable()
+    //{
+    //    OnExorcism += Exorcise;
+    //}
 
-    private void OnDisable()
-    {
-        OnExorcism -= Exorcise;
-    }
+    //private void OnDisable()
+    //{
+    //    OnExorcism -= Exorcise;
+    //}
 
     private void Awake()
     {
@@ -99,12 +101,19 @@ public class Ghost : MonoBehaviour
             if (_waitTime > 0)
             {
                 _waitTime -= Time.deltaTime;
+                delay = true;
+                timeBetween = 5;
             }
             else
             {
                 _isAtTargetObject = false;
                 _waitTime = 0;
-                SetInteractionTarget();
+                if(timeBetween >= 0 && delay)
+                    timeBetween -= Time.deltaTime;
+                if (timeBetween < 0) {
+                    delay = false;
+                    SetInteractionTarget();
+                }
             }
 
         }
@@ -137,6 +146,7 @@ public class Ghost : MonoBehaviour
         }
     }
     void Disappear() {
+        Debug.Log("exorcised");
         Destroy(gameObject);
     }
 
@@ -146,10 +156,10 @@ public class Ghost : MonoBehaviour
         return randomNumber < _ectoplasmChance;
     }
 
-    public static void RaiseExorcism(int objectIndex)
-    {
-        OnExorcism?.Invoke(objectIndex);
-    }
+    //public static void RaiseExorcism(int objectIndex)
+    //{
+    //    OnExorcism?.Invoke(objectIndex);
+    //}
 
     public void SetWaitTime(float time)
     {
