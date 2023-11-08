@@ -21,8 +21,8 @@ public class WinLoseHandler : MonoBehaviour
 
     private void Awake()
     {
-        _winBanner.DOFade(0, 0.1f);
-        _loseBanner.DOFade(0, 0.1f);
+        _winBanner.DOFade(0, 0);
+        _loseBanner.DOFade(0, 0);
         message.SetActive(false);
     }
 
