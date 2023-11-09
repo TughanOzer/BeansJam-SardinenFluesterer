@@ -74,15 +74,12 @@ public class DeathTrap : MonoBehaviour
             _timer = _armingTime;
         }
 
-        if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed)
+        if (collision.CompareTag("Player"))
         {
             playerInRange = true;
-            playerPrompt.SetActive(true);
-            _timer = _disarmingTime;
-            unarmingTimeUI.maxValue = _timer;
         }
 
-        if (collision.CompareTag("Girlfriend") && _isArmed)
+        if (collision.CompareTag("Girlfriend") && _isArmed && FindObjectOfType<ObjectsFoundVisuals>().GhostImages.Count != 0)
         {
             TriggerTrap();
         }
@@ -90,9 +87,7 @@ public class DeathTrap : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && _isArmed && !_isBeingDisarmed) {
-
-            playerPrompt.SetActive(false);
+        if (collision.CompareTag("Player")) {
             playerInRange = false;
         } 
     }
@@ -105,31 +100,31 @@ public class DeathTrap : MonoBehaviour
             //    _timer -= Time.deltaTime;
             //}
 
-            if (playerInRange && _isArmed)
+            if (playerInRange)
             {
-                if (Input.GetKey(KeyCode.E))
-                {
-                    _isBeingDisarmed = true;
-                    _timer -= Time.deltaTime;
-                    unarmingTimeUI.value = _timer;
-                    timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
+                if(_isArmed) { 
+                    playerPrompt.SetActive(true);
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        _isBeingDisarmed = true;
+                        _timer -= Time.deltaTime;
+                        unarmingTimeUI.value = _timer;
+                        timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
 
+                    }
+                    else
+                    {
+                        _isBeingDisarmed = false;
+                        _timer = _disarmingTime;
+                        unarmingTimeUI.value = _timer;
+                        timeRemaining.text = _timer.ToString();
+                        unarmingTimeUI.maxValue = _timer;
+                    }
                 }
-                else
-                {
-                    _isBeingDisarmed = false;
-                    unarmingTimeUI.value = _disarmingTime;
-                    timeRemaining.text = _disarmingTime.ToString();
-                    _timer = _disarmingTime;
-                }
-
+            }else {
+                playerPrompt.SetActive(false);
             }
-            else {
-
-                _timer -= Time.deltaTime;
-            }
-        
-                
+            _timer -= Time.deltaTime;
         }
         
 

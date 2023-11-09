@@ -77,7 +77,7 @@ public class GhostManager : MonoBehaviour
         var ghost = Instantiate(_ghostPrefabs[0], new Vector2(xSpawnPosition, ySpawnPosition), Quaternion.identity);
         ghost.SetUp(ghostIndex);
         CountGhosts();
-        Debug.Log(ghostIndex);
+        //Debug.Log(ghostIndex);
     }
 
     #endregion

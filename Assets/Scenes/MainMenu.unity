@@ -2544,6 +2544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8602347370375908892, guid: 680de305dcad0ff47b98405c84445e59, type: 3}
+      propertyPath: <MusicVolume>k__BackingField
+      value: 0.666
+      objectReference: {fileID: 0}
     - target: {fileID: 8886161603150754900, guid: 680de305dcad0ff47b98405c84445e59, type: 3}
       propertyPath: Loop
       value: 1
