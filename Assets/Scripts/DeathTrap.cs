@@ -108,14 +108,14 @@ public class DeathTrap : MonoBehaviour
                     {
                         _isBeingDisarmed = true;
                         _timer -= Time.deltaTime;
-                        unarmingTimeUI.value = _timer;
+                        unarmingTimeUI.value = _timer; 
                         timeRemaining.text = Mathf.FloorToInt(_timer + 1).ToString();
 
                     }
                     else
                     {
                         _isBeingDisarmed = false;
-                        _timer = _disarmingTime;
+                        _timer = _disarmingTime; Debug.Log(_timer);
                         unarmingTimeUI.value = _timer;
                         timeRemaining.text = _timer.ToString();
                         unarmingTimeUI.maxValue = _timer;
@@ -161,7 +161,6 @@ public class DeathTrap : MonoBehaviour
                 _isBeingDisarmed = false;
                 _isBeingArmed = false;
                 _isArmed = false;
-
                 InteractionFinished();
             }
             else if (_isBeingArmed)
@@ -207,6 +206,7 @@ public class DeathTrap : MonoBehaviour
         {
             myRenderer.DOFade(1, 1f);
             timerAnimator.SetBool("arming", false);
+            if(playerInRange) _timer = _armingTime;
         }
         else
         {

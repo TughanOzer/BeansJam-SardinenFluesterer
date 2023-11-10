@@ -6280,9 +6280,13 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3097243373759821963, guid: a5e3baeb39cfcfe4d960bb59be2b1283, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4499157042932788254, guid: a5e3baeb39cfcfe4d960bb59be2b1283, type: 3}
       propertyPath: _speed
-      value: 0.003
+      value: 0.00666
       objectReference: {fileID: 0}
     - target: {fileID: 4499157042932788254, guid: a5e3baeb39cfcfe4d960bb59be2b1283, type: 3}
       propertyPath: working

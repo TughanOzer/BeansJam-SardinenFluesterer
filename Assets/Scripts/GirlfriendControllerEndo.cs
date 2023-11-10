@@ -39,10 +39,10 @@ public class GirlfriendControllerEndo : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isOnStation)
-            _currentStationTimer -= Time.deltaTime;
+            _currentStationTimer -= Time.fixedDeltaTime;
 
         if (_currentStationTimer <= 0)
             _isOnStation = false;

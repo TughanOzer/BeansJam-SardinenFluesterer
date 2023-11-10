@@ -10,9 +10,9 @@ public class Ghost : MonoBehaviour
 {
     #region Fields and Properties
 
-    public static event Action<int> OnExorcism;
+    //public static event Action<int> OnExorcism;
 
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _speed;
     [SerializeField] private float _floatTime = 1f;
     [SerializeField] private float _floatAmplitude = 1f;
     [SerializeField] private float _ectoplasmChance = 0.5f;
@@ -74,7 +74,7 @@ public class Ghost : MonoBehaviour
         _objectIndex = objectIndex;        
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         var nextInteractionPosition = _nextInteractionObject.transform.position;
         var distance = Vector3.Distance(transform.position, nextInteractionPosition);
@@ -84,17 +84,17 @@ public class Ghost : MonoBehaviour
             _isAtTargetObject = false;
             var direction = nextInteractionPosition - transform.position;
 
-            if (direction.x > 0)
-                _visualRenderer.flipX = false;
-            else
-                _visualRenderer.flipX = true;
+            //if (direction.x > 0)
+            //    _visualRenderer.flipX = false;
+            //else
+            //    _visualRenderer.flipX = true;
 
             transform.Translate(direction.normalized * _speed);
         }
         else
         {
             _isAtTargetObject = true;
-        }   
+        }
         
         if (_isAtTargetObject)
         {

@@ -65,8 +65,8 @@ public class GhostManager : MonoBehaviour
      
         int ghostIndex = UnityEngine.Random.Range(1, ghostSpawnCount+1);
 
-        float xSpawnPosition = UnityEngine.Random.Range(10, 25);
-        float ySpawnPosition = UnityEngine.Random.Range(10, 25);
+        float xSpawnPosition = UnityEngine.Random.Range(5, 10);
+        float ySpawnPosition = UnityEngine.Random.Range(5, 10);
 
         float xInverted = UnityEngine.Random.Range(0, 1f);
         float yInverted = UnityEngine.Random.Range(0, 1f);
