@@ -76,6 +76,7 @@ public class DeathTrap : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            if (_isArmed) _timer = _disarmingTime;
             playerInRange = true;
         }
 
@@ -115,7 +116,7 @@ public class DeathTrap : MonoBehaviour
                     else
                     {
                         _isBeingDisarmed = false;
-                        _timer = _disarmingTime; Debug.Log(_timer);
+                        _timer = _disarmingTime; //Debug.Log(_timer);
                         unarmingTimeUI.value = _timer;
                         timeRemaining.text = _timer.ToString();
                         unarmingTimeUI.maxValue = _timer;
@@ -204,9 +205,9 @@ public class DeathTrap : MonoBehaviour
 
         if (_isArmed)
         {
+            if(playerInRange) _timer = _armingTime;
             myRenderer.DOFade(1, 1f);
             timerAnimator.SetBool("arming", false);
-            if(playerInRange) _timer = _armingTime;
         }
         else
         {
