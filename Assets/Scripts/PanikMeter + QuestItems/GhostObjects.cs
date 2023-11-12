@@ -40,6 +40,7 @@ public class GhostObjects : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.GetComponent<PlayerController2D>()) {
             playerInRange = true;
+            if (objectIsHaunted) timer = goValues.taskTime;
 
             //StartCoroutine(Timer(goValues.taskTime));
         }
