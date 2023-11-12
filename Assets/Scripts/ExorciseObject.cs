@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class ExorciseObject : MonoBehaviour
 {
 
     [SerializeField] WinLoseHandler winLoseHandler;
+    public static event Action OnAllObjectsFound;
 
     public GameObject canvas;
     public Slider slider;
@@ -17,6 +19,15 @@ public class ExorciseObject : MonoBehaviour
     bool playerInRange = false;
     float unarmingTime = 3;
     float timer;
+
+    private void OnEnable()
+    {
+        OnAllObjectsFound += AllObjectsFound;
+    }
+    private void OnDisable()
+    {
+        OnAllObjectsFound -= AllObjectsFound;
+    }
 
     private void Start()
     {
@@ -89,19 +100,16 @@ public class ExorciseObject : MonoBehaviour
 
     void ObjectExorcised() {
         GameObject.FindObjectOfType<ObjectsFoundVisuals>().FadeImage(remainingObjects);
-        if (FindObjectOfType<GhostManager>().ghostsInGame != 0)
-        {
-            foreach(var ghost in FindObjectsOfType<Ghost>()) 
-                ghost.Exorcise(remainingObjects);
-        }
-            
+
         remainingObjects--;
-        if (remainingObjects == 0) {
-            winLoseHandler.FadeInWinImage();
-            winLoseHandler.SetMessage("You exorcised the poltergeist kids!");
-        }
+        if (remainingObjects == 0) 
+            OnAllObjectsFound?.Invoke();
+
         Destroy(gameObject);
     }
-   
+    void AllObjectsFound() {
+
+        winLoseHandler.SetMessage("You exorcised the poltergeist kids!");
+    }
 
 }

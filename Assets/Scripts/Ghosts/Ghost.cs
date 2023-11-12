@@ -20,7 +20,7 @@ public class Ghost : MonoBehaviour
 
     [SerializeField] private GameObject _ectoplasmPrefab;
 
-    private int _objectIndex;
+    public int _objectIndex;
     private List<GameObject> _possibleInteractions = new();
     private GameObject _nextInteractionObject;
     private bool _isAtTargetObject;
@@ -144,9 +144,10 @@ public class Ghost : MonoBehaviour
         {
             _visualRenderer.DOFade(1, 3f).OnComplete(Disappear);
         }
+        Debug.Log("exorcised ghosts of index " + objectIndex);
     }
     void Disappear() {
-        Debug.Log("exorcised");
+        
         Destroy(gameObject);
     }
 

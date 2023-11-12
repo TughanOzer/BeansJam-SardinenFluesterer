@@ -54,30 +54,35 @@ public class GhostManager : MonoBehaviour
     }
     private void SpawnGhost()
     {
-        var ghostSpawnCount = _ghostObjectUI.GhostImages.Count;
+       var ghostSpawnCount = _ghostObjectUI.GhostImages.Count;
 
-        if (_currentSpawnDelay > _minimumDelay)
-            _currentSpawnDelay -= _delayReductionStep * ghostSpawnCount;
-        else
-            _currentSpawnDelay = _minimumDelay;
+        if (ghostSpawnCount != 0)
+        {
+            if (_currentSpawnDelay > _minimumDelay)
+                _currentSpawnDelay -= _delayReductionStep * ghostSpawnCount;
+            else
+                _currentSpawnDelay = _minimumDelay;
 
-        _spawnTimer = _currentSpawnDelay;
+            _spawnTimer = _currentSpawnDelay;
      
-        int ghostIndex = UnityEngine.Random.Range(1, ghostSpawnCount+1);
+            int ghostIndex = UnityEngine.Random.Range(1, ghostSpawnCount+1);
 
-        float xSpawnPosition = UnityEngine.Random.Range(5, 10);
-        float ySpawnPosition = UnityEngine.Random.Range(5, 10);
+            float xSpawnPosition = UnityEngine.Random.Range(5, 10);
+            float ySpawnPosition = UnityEngine.Random.Range(5, 10);
 
-        float xInverted = UnityEngine.Random.Range(0, 1f);
-        float yInverted = UnityEngine.Random.Range(0, 1f);
+            float xInverted = UnityEngine.Random.Range(0, 1f);
+            float yInverted = UnityEngine.Random.Range(0, 1f);
 
-        xSpawnPosition = xInverted < 0.5f ? xSpawnPosition : -xSpawnPosition;
-        ySpawnPosition = yInverted < 0.5f ? ySpawnPosition : -ySpawnPosition;
+            xSpawnPosition = xInverted < 0.5f ? xSpawnPosition : -xSpawnPosition;
+            ySpawnPosition = yInverted < 0.5f ? ySpawnPosition : -ySpawnPosition;
 
-        var ghost = Instantiate(_ghostPrefabs[0], new Vector2(xSpawnPosition, ySpawnPosition), Quaternion.identity);
-        ghost.SetUp(ghostIndex);
-        CountGhosts();
-        //Debug.Log(ghostIndex);
+        
+            var ghost = Instantiate(_ghostPrefabs[0], new Vector2(xSpawnPosition, ySpawnPosition), Quaternion.identity);
+            ghost.SetUp(ghostIndex);
+            CountGhosts();
+            Debug.Log("Ghost Index: " + ghostIndex);
+        }
+        
     }
 
     #endregion

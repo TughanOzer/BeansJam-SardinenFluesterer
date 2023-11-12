@@ -30,12 +30,14 @@ public class WinLoseHandler : MonoBehaviour
     {
         DeathTrap.OnDeathTrapTriggered += FadeInLoseImage;
         FearMeter.OnFearMax += FadeInLoseImage;
+        ExorciseObject.OnAllObjectsFound += FadeInWinImage;
     }
 
     private void OnDisable()
     {
         DeathTrap.OnDeathTrapTriggered -= FadeInLoseImage;
         FearMeter.OnFearMax -= FadeInLoseImage;
+        ExorciseObject.OnAllObjectsFound -= FadeInWinImage;
     }
 
     private void Update()

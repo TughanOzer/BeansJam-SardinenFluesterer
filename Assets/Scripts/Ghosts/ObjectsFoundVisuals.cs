@@ -33,12 +33,20 @@ public class ObjectsFoundVisuals : MonoBehaviour
     public void FadeImage(int _)
     {
         if (GhostImages.Count > 0)
-        {
+        { 
+            Debug.Log("ghost images before " + GhostImages.Count);
+            if (FindObjectOfType<GhostManager>().ghostsInGame != 0)
+            {
+                foreach (var ghost in FindObjectsOfType<Ghost>())
+                    ghost.Exorcise(_);
+            }
             var image = GhostImages[GhostImages.Count - 1];
             GhostImages.Remove(image);
             image.DOFade(0.15f, 2).SetEase(Ease.InBounce);
             image.rectTransform.DOShakeRotation(2, 30, 2, 45, true, ShakeRandomnessMode.Harmonic);
+            Debug.Log("ghost images after " + GhostImages.Count);
         }
+        
     }
     #endregion
 }
