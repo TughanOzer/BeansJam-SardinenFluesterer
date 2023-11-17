@@ -142,7 +142,7 @@ public class Ghost : MonoBehaviour
     {
         if (objectIndex == _objectIndex)
         {
-            _visualRenderer.DOFade(1, 3f).OnComplete(Disappear);
+            _visualRenderer.DOFade(0, 3f).OnComplete(Disappear);
         }
         Debug.Log("exorcised ghosts of index " + objectIndex);
     }
