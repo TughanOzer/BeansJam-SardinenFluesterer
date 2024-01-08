@@ -11,14 +11,15 @@ public class PlayerController2D : MonoBehaviour
      SerializeField] float movementSpeed;
     float horizontalMovement;
     float verticalMovement;
-    //bool moving;
+    bool moving;
     public Vector2 moveDirection;
 
     [Header("Animation + Sound")]
     [SerializeField] Animator animator;
-    [SerializeField] AudioSource audioSource;
-    [Tooltip("Elements can be called by sounds[int x]."),
-     SerializeField] List<AudioClip> sounds = new List<AudioClip>();
+    //[SerializeField] AudioSource audioSource;
+    //[Tooltip("Elements can be called by sounds[int x]."),
+    // SerializeField] List<AudioClip> sounds = new List<AudioClip>();
+    [SerializeField] GameObject myAudioSource;
 
     void Update()
     {
@@ -37,7 +38,8 @@ public class PlayerController2D : MonoBehaviour
         verticalMovement = Input.GetAxis("Vertical");
         Move();
 
-        //if(moving) PlaySoundEffect(0);
+        if (moving) myAudioSource.SetActive(true);
+        else myAudioSource.SetActive(false);
     }
 
     void Move() {
@@ -45,7 +47,7 @@ public class PlayerController2D : MonoBehaviour
         moveDirection = new Vector2(horizontalMovement, verticalMovement);
         if (horizontalMovement != 0f || verticalMovement != 0f)
         {
-            //moving = true;
+            moving = true;
             animator.SetBool("moving", true);
 
             
@@ -71,7 +73,7 @@ public class PlayerController2D : MonoBehaviour
         else
         {
             animator.SetBool("moving", false);
-            //moving = false;
+            moving = false;
             animator.SetFloat("Move y", 0);
             animator.SetFloat("Move x", 0);
         }
@@ -79,9 +81,9 @@ public class PlayerController2D : MonoBehaviour
         
     }
 
-    void PlaySoundEffect(int x) {
-        audioSource.clip = sounds[x];
-        audioSource.Play();
-    }
+    //void PlaySoundEffect(int x) {
+    //    audioSource.clip = sounds[x];
+    //    audioSource.Play();
+    //}
 
 }
